@@ -36,11 +36,11 @@ public class IfElseStatementTheme {
         int first = 7;
         int second = 9;
         if (first < second) {
-            System.out.println("Second is greater than first");
+            System.out.println(second + "  greater than  " + first);
         } else if (first > second) {
-            System.out.println("First is greater than second");
+            System.out.println(first + "  greater than  " + second);
         } else {
-            System.out.println("First and second are equal");
+            System.out.println(first + " ==  " + second);
         }
 
         System.out.println("\n3. Проверка числа");
@@ -49,40 +49,35 @@ public class IfElseStatementTheme {
             System.out.println("The number is zero");
         } else {
             if (number < 0) {
-                System.out.println(number + "The number is negative");
+                System.out.println(number + " - negative");
             } else {
-                System.out.println(number + "The number is positive");
+                System.out.println(number + " - positive");
             }
             if (number % 2 == 0) {
-                System.out.println(number + " - The number is even");
+                System.out.println(number + " - even");
             } else {
-                System.out.println(number + " - The number is odd");
+                System.out.println(number + " - odd");
             }
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
         int number1 = 123;
         int number2 = 223;
-        int ones;
-        int tens;
-        int hundreds;
         System.out.println("Исходные числа : " + number1 + " и " + number2);
         if (number1 == number2) {
             System.out.println("Числа равны. Цифры и разряды равны!!!");
         } else {
             if (number1 % 10 == number2 % 10) {
-                ones = number1 % 10;
-                System.out.print("Разряды под номером один - равны -> " + ones + " = " + ones);
+                int ones = number1 % 10;
+                System.out.println("Разряды под номером один - равны -> " + ones + " = " + ones);
             }
             if (number1 / 10 % 10 == number2 / 10 % 10) {
-                tens = number1 / 10 % 10;
-                System.out.print("  Разряды под номером два - равны -> " + tens + " = " +
-                        tens);
+                int tens = number1 / 10 % 10;
+                System.out.println("Разряды под номером два - равны -> " + tens + " = " + tens);
             }
             if (number1 / 100 % 10 == number2 / 100 % 10) {
-                hundreds = number1 / 100 % 10;
-                System.out.print("  Разряды под номером три - равны -> " + hundreds + " = " +
-                        hundreds);
+                int hundreds = number1 / 100 % 10;
+                System.out.println("Разряды под номером три - равны -> " + hundreds + " = " + hundreds);
             }
         }
 
@@ -100,12 +95,11 @@ public class IfElseStatementTheme {
 
         System.out.println("\n6. Подсчет начисленных банком %");
         float deposit = 321123.59f;
-        float interestRate = (float) 5 / 12;
-
+        float interestRate = (float) 5;
         if (deposit >= 100000f && deposit <= 300000f) {
-            interestRate = (float) 7 / 12;
+            interestRate = (float) 7;
         } else if (deposit > 300000f) {
-            interestRate = (float) 10 / 12;
+            interestRate = (float) 10;
         }
         float totalAmount = ((deposit / (float) 100) * interestRate) + deposit;
         System.out.println("Сумма вклада = " + deposit + "\nСумма начисленного процента = " +
@@ -136,28 +130,40 @@ public class IfElseStatementTheme {
                 "Average grade: " + averageGrade + "\n" + "Average percent: " + averagePercent);
 
         System.out.println("\n8. Расчет годовой прибыли");
-        float goodsAreSoldMonthly = 13025.233f;
+        float goodsSoldMonthly = 13025.233f;
         float premisesRentalMonthly = 5123.018f;
         float productionCostMonthly = 9001.729f;
-        float profitForTheYear = (goodsAreSoldMonthly - (premisesRentalMonthly + productionCostMonthly)) * 12;
-        if (profitForTheYear > 0) {
-            System.out.println("Profit for the year is:  " + "+" + profitForTheYear);
+        float profitYear = (goodsSoldMonthly - (premisesRentalMonthly + productionCostMonthly)) * 12;
+        if (profitYear > 0) {
+            System.out.println("Profit for the year is:  " + "+" + profitYear);
         } else {
-            System.out.println("Profit for the year is:  " + profitForTheYear);
+            System.out.println("Profit for the year is:  " + profitYear);
+        }
+
+        System.out.println("\n9. Расчет годовой прибыли");
+        BigDecimal goodsSoldMonthlyBigD = new BigDecimal("13025.233");
+        BigDecimal premisesRentalMonthlyBigD = new BigDecimal("5123.018");
+        BigDecimal productionCostMonthlyBigD = new BigDecimal("9001.729");
+        BigDecimal profitYearBigD = (goodsSoldMonthlyBigD.subtract(premisesRentalMonthlyBigD.add(productionCostMonthlyBigD))
+                .multiply(BigDecimal.valueOf(12)));
+        if (profitYearBigD.doubleValue() > 0) {
+            System.out.println("Profit for the year is:  " + "+" + profitYearBigD);
+        } else {
+            System.out.println("Profit for the year is:  " + profitYearBigD);
         }
 
         System.out.println("\n10. Подсчет начисленных банком %");
-        BigDecimal dep = new BigDecimal("321123.59");
-        BigDecimal intRate = new BigDecimal("5").divide(BigDecimal.valueOf(12), 3, RoundingMode.HALF_UP);
-        if (dep.floatValue() >= 100000f && dep.floatValue() <= 300000f) {
-            intRate = new BigDecimal("7").divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
-        } else if (dep.floatValue() > 300000f) {
-            BigDecimal intRate3 = new BigDecimal("10").divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
+        BigDecimal depositBigD = new BigDecimal("321123.59");
+        BigDecimal interestRateBigD = BigDecimal.valueOf(5);
+        if (depositBigD.doubleValue() >= 100000f && depositBigD.floatValue() <= 300000f) {
+            interestRateBigD = BigDecimal.valueOf(7);
+        } else if (depositBigD.floatValue() > 300000f) {
+            interestRateBigD = BigDecimal.valueOf(10);
         }
-        BigDecimal totAm = (dep.divide(new BigDecimal("100"), 3)).multiply(intRate)
-                .add(dep);
-        System.out.println("Сумма вклада = " + dep + "\nСумма начисленного процента = " +
-                totAm.subtract(dep).setScale(3, RoundingMode.HALF_UP) +
-                "\nИтоговая сумма с % = " + totAm.setScale(3, RoundingMode.HALF_UP));
+        BigDecimal totalAmountBigD = (depositBigD.divide(new BigDecimal("100")).multiply(interestRateBigD)
+                .add(depositBigD).setScale(3, RoundingMode.HALF_UP));
+        System.out.println("Сумма вклада = " + depositBigD + "\nСумма начисленного процента = " +
+                totalAmountBigD.subtract(depositBigD).setScale(3, RoundingMode.HALF_UP) +
+                "\nИтоговая сумма с % = " + totalAmountBigD.setScale(3, RoundingMode.HALF_UP));
     }
 }

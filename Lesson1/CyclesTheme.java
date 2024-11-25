@@ -3,90 +3,85 @@ public class CyclesTheme {
         System.out.println("1. Подсчет суммы четных и нечетных чисел");
         int start = -10;
         int end = 21;
-        int amountEven = 0;
-        int amountOdd = 0;
+        int evenSum = 0;
+        int oddSum = 0;
         do {
             if (start % 2 == 0) {
-                amountEven += start;
+                evenSum += start;
             } else {
-                amountOdd += start;
+                oddSum += start;
             }
             start++;
         } while (start < end);
-        System.out.println(amountEven);
-        System.out.println(amountOdd);
+        System.out.println("В Отрезке [" + start + ", " + end + "]" + " сумма четных чисел =" + evenSum +
+                ", а нечетных = " + oddSum);
 
         System.out.println("\n2. Вывод чисел между min и max в порядке убывания");
         int a = -1;
         int b = 5;
         int c = 10;
-        int max;
-        int min;
-        if (a < b && a < c) {
+        int max = 0;
+        int min = 0;
+        if (a < b) {
+            max = b;
             min = a;
-        } else if (b < c && b < a) {
-            min = b;
-        } else {
+        }
+        if (c < a) {
             min = c;
         }
-        if (a > b && a > c) {
-            max = a;
-        } else if (b > c && b > a) {
-            max = b;
-        } else {
+        if (c > b) {
             max = c;
         }
-        for (int i = max - 1; i > min; i--) {
+        System.out.printf("%d %d\n", min, max);
+        for (int i = max - 1; i > min; max--) {
             System.out.print(i + " ");
+            i--;
         }
 
         System.out.println("\n3. Вывод реверсивного числа и суммы его цифр");
-        int number = 1234;
-        int count = 0;
+
+        int number1 = 1234;
+        int number2 = number1;
         int amount = 0;
-        while (count < 4) {
-            if (count == 0) {
-                amount += number % 10;
-                count++;
-                System.out.print(number % 10 + " ");
-            } else if (count == 1) {
-                amount += number % 100 / 10;
-                count++;
-                System.out.print(number % 100 / 10 + " ");
-            } else if (count == 2) {
-                amount += number % 1000 / 100;
-                count++;
-                System.out.print(number % 1000 / 100 + " ");
-            } else if (count == 3) {
-                amount += number % 10000 / 1000;
-                count++;
-                System.out.print(number % 10000 / 1000 + " " + "\n" + amount);
-            }
+        while (number2 != 0) {
+            System.out.print(number2 % 10 + " ");
+            amount += number2 % 10;
+            number2 /= 10;
         }
+        System.out.println("\nСумма цифр в числе " + number1 + " = " + amount);
 
         System.out.println("\n4. Вывод чисел в несколько строк");
-        int f = 24;
-        for (int i = 0; i < f; i++) {
+        int en = 24;
+        int st = 1;
+        int counter = 0;
+        for (int i = st; i < en; i++) {
             if (i % 2 != 0) {
-                System.out.printf("%d %d %d %d %d%n", i, 0, 0, 0, 0);
+                counter++;
+                System.out.printf("%5d", i);
+            }
+            if (counter % 5 == 0) {
+                System.out.println();
+                counter = 0;
+            }
+            if (i == en - 1) {
+                for (int j = 0; j <= counter; j++) {
+                    System.out.printf("%5d", 0);
+                }
             }
         }
 
         System.out.println("\n5. Проверка количества двоек числа на четность/нечетность");
-        int num = 3242592;
-        int num2 = num;
-        int g = 0;
-        while (num != 0) {
-            int result = num % 10;
-            num /= 10;
-            if (result == 2) {
-                g++;
+        int number3 = 3242592;
+        int number4 = number3;
+        int score = 0;
+        while (number3 > 0) {
+            if (number3 % 10 == 2) {
+                score++;
             }
+            number3 /= 10;
         }
-        if (g % 2 == 0) {
-            System.out.println("В " + num2 + " четное " + "(" + g + ")" + " количество двоек");
-        } else {
-            System.out.println("В " + num2 + " нечетное " + "(" + g + ")" + " количество двоек");
+        if (score % 2 != 0) {
+            System.out.println("В " + number4 + " нечетное " + "(" + score + ")" + " количество двоек");
         }
 
         System.out.println("\n6. Вывод геометрических фигур");

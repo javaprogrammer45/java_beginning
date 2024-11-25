@@ -68,16 +68,16 @@ public class IfElseStatementTheme {
             System.out.println("Числа равны. Цифры и разряды равны!!!");
         } else {
             if (number1 % 10 == number2 % 10) {
-                int ones = number1 % 10;
-                System.out.println("Разряды под номером один - равны -> " + ones + " = " + ones);
+                System.out.println("Разряды под номером один - равны -> " + number1 % 10 +
+                        " = " + number2 % 10);
             }
             if (number1 / 10 % 10 == number2 / 10 % 10) {
-                int tens = number1 / 10 % 10;
-                System.out.println("Разряды под номером два - равны -> " + tens + " = " + tens);
+                System.out.println("Разряды под номером два - равны -> " + number1 / 10 % 10 +
+                        " = " + number2 / 10 % 10);
             }
             if (number1 / 100 % 10 == number2 / 100 % 10) {
-                int hundreds = number1 / 100 % 10;
-                System.out.println("Разряды под номером три - равны -> " + hundreds + " = " + hundreds);
+                System.out.println("Разряды под номером три - равны -> " + number1 / 100 % 10 +
+                        " = " + number2 / 100 % 10);
             }
         }
 

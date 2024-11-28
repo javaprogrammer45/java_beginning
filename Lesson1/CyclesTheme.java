@@ -12,8 +12,8 @@ public class CyclesTheme {
                 oddSum += start;
             }
             start++;
-        } while (start < end);
-        System.out.println("В Отрезке [" + start + ", " + end + "]" + " сумма четных чисел =" + evenSum +
+        } while (start <= end);
+        System.out.println("В Отрезке [" + start + ", " + end + "]" + " сумма четных чисел = " + evenSum +
                 ", а нечетных = " + oddSum);
 
         System.out.println("\n2. Вывод чисел между min и max в порядке убывания");
@@ -33,25 +33,27 @@ public class CyclesTheme {
             max = c;
         }
         System.out.printf("%d %d\n", min, max);
-        for (int i = max - 1; i > min; max--) {
+        for (int i = max - 1; i > min; i--) {
             System.out.print(i + " ");
             i--;
         }
+        System.out.println();
 
         System.out.println("\n3. Вывод реверсивного числа и суммы его цифр");
 
         int number1 = 1234;
-        int number2 = number1;
-        int amount = 0;
-        while (number2 != 0) {
-            System.out.print(number2 % 10 + " ");
-            amount += number2 % 10;
-            number2 /= 10;
+        int number1Copy = number1;
+        int sum = 0;
+        while (number1Copy != 0) {
+            int result = number1Copy % 10;
+            System.out.print(result + " ");
+            sum += result;
+            number1Copy /= 10;
         }
-        System.out.println("\nСумма цифр в числе " + number1 + " = " + amount);
+        System.out.println("\nСумма цифр в числе " + number1 + " = " + sum);
 
         System.out.println("\n4. Вывод чисел в несколько строк");
-        int en = 24;
+        int en = 30;
         int st = 1;
         int counter = 0;
         for (int i = st; i < en; i++) {
@@ -69,25 +71,25 @@ public class CyclesTheme {
                 }
             }
         }
+        System.out.println();
 
         System.out.println("\n5. Проверка количества двоек числа на четность/нечетность");
-        int number3 = 3242592;
+        int number3 = 3242522;
         int number4 = number3;
-        int score = 0;
+        int tensCount = 0;
         while (number3 > 0) {
             if (number3 % 10 == 2) {
-                score++;
+                tensCount++;
             }
             number3 /= 10;
         }
-        if (score % 2 != 0) {
-            System.out.println("В " + number4 + " нечетное " + "(" + score + ")" + " количество двоек");
+        if (tensCount % 2 != 0) {
+            System.out.println("В " + number4 + " нечетное " + "(" + tensCount + ")" + " количество двоек");
+        } else {
+            System.out.println("В " + number4 + " четное " + "(" + tensCount + ")" + " количество двоек");
         }
 
         System.out.println("\n6. Вывод геометрических фигур");
-        /*
-        Если нужно, я уберу пробелы в фигурах
-         */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
                 System.out.print('*' + " ");
@@ -95,32 +97,33 @@ public class CyclesTheme {
             System.out.println();
         }
         System.out.println();
-        int i = 5;
-        while (i >= 1) {
-            int j = 1;
-            while (j <= i) {
+
+        int counterString = 5;
+        while (counterString >= 1) {
+            int counterElem = 1;
+            while (counterElem <= counterString) {
                 System.out.print('#' + " ");
-                j++;
+                counterElem++;
             }
             System.out.println();
-            i--;
+            counterString--;
         }
         System.out.println();
 
-        int n = 3;
-        int m = 2 * n - 1;
-        int k = 1;
-        int d = 1;
-        int w = 1;
+        int heightTriangle = 3;
+        int quantityStrings = 2 * heightTriangle - 1;
+        int counterStrings = 1;
+        int decreaseWidthString = 1;
+        int widthString = 1;
         do {
-            int j = 0;
+            int counterElemString = 0;
             do {
                 System.out.print("$");
-            } while (++j < w);
+            } while (++counterElemString < widthString);
             System.out.println();
-            if (k == n) d = -1;
-            w += d;
-        } while (++k <= m);
+            if (counterStrings == heightTriangle) decreaseWidthString = -1;
+            widthString += decreaseWidthString;
+        } while (++counterStrings <= quantityStrings);
 
         System.out.println("\n7. Вывод ASCII-символов");
         System.out.println("DECIMAL     " + "CHARACTER    " + "DESCRIPTION");
@@ -164,7 +167,7 @@ public class CyclesTheme {
         System.out.println("\n10. Вывод таблицы умножения Пифагора");
         System.out.printf("%30s%n", "Таблица Пифагора");
         for (int l = 1; l < 10; l++) {
-            for (k = 1; k < 10; k++) {
+            for (int k = 1; k < 10; k++) {
                 System.out.print("\t" + k * l);
             }
             System.out.println();

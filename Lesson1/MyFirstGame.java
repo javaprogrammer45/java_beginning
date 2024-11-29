@@ -5,17 +5,15 @@ public class MyFirstGame {
         int targetNum = (int) (Math.random() * 100) + 1;
         int playerNum;
         Scanner sc = new Scanner(System.in);
+
         do {
             playerNum = sc.nextInt();
             System.out.println(targetNum);
             if (playerNum == targetNum) {
                 System.out.println("YOU WIN!");
-                break;
-            } else if (playerNum > targetNum) {
-                System.out.println(playerNum + " больше того, что загадал компьютер");
-            } else {
-                System.out.println(playerNum + " меньше того, что загадал компьютер");
             }
+            String answer = playerNum > targetNum ? playerNum + " больше того, что загадал компьютер" : targetNum + " меньше того, что загадал компьютер";
+            System.out.println(answer);
         } while (playerNum != targetNum);
     }
 }

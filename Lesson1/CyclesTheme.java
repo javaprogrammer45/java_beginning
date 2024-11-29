@@ -52,22 +52,23 @@ public class CyclesTheme {
         System.out.println("\nСумма цифр в числе " + number1 + " = " + sum);
 
         System.out.println("\n4. Вывод чисел в несколько строк");
-        int en = 30;
-        int st = 1;
+        int endSegment = 24;
+        int startSegment = 1;
         int counter = 0;
-        for (int i = st; i < en; i++) {
+        int quantityElements = 5;
+        for (int i = startSegment; i < endSegment; i++) {
             if (i % 2 != 0) {
                 counter++;
                 System.out.printf("%5d", i);
             }
-            if (counter % 5 == 0) {
+            if (counter == quantityElements) {
                 System.out.println();
                 counter = 0;
             }
-            if (i == en - 1) {
-                for (int j = 0; j <= counter; j++) {
-                    System.out.printf("%5d", 0);
-                }
+        }
+        if (counter < quantityElements && counter != 0) {
+            for (int i = 0; i < quantityElements - counter; i++) {
+                System.out.printf("%5d", 0);
             }
         }
 

@@ -12,10 +12,12 @@ public class MyFirstGame {
             playerNum = sc.nextInt();
             System.out.println(targetNum);
             if (playerNum == targetNum) {
-                System.out.println("YOU WIN!");
+                break;
             }
-            String answer = playerNum > targetNum ? playerNum + " больше того, что загадал компьютер" : targetNum + " меньше того, что загадал компьютер";
-            System.out.println(answer);
+            String answer = playerNum > targetNum ? " больше того, что загадал компьютер" :
+                    " меньше того, что загадал компьютер";
+            System.out.println(playerNum + answer);
         } while (playerNum != targetNum);
+        System.out.println("YOU WIN!");
     }
 }

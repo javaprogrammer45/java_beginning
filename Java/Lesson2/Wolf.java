@@ -1,3 +1,5 @@
+package Lesson2;
+
 public class Wolf {
     private String gender;
     private String nickName;

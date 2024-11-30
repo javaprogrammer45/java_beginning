@@ -1,3 +1,5 @@
+package Lesson2;
+
 public class Person {
     private String gender = "Male";
     private String name = "John";

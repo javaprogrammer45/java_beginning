@@ -11,9 +11,6 @@ public class MyFirstGame {
         do {
             playerNum = sc.nextInt();
             System.out.println(targetNum);
-            if (playerNum == targetNum) {
-                break;
-            }
             String answer = playerNum > targetNum ? " больше того, что загадал компьютер" :
                     " меньше того, что загадал компьютер";
             System.out.println(playerNum + answer);

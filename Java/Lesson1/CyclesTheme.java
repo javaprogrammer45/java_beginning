@@ -55,20 +55,20 @@ public class CyclesTheme {
         System.out.println("\n4. Вывод чисел в несколько строк");
         end = 24;
         start = 1;
-        int iterationCount = 0;
-        int elementsString = 5;
+        int numIterations = 0;
+        int numbersInLine = 5;
         for (int i = start; i < end; i++) {
             if (i % 2 != 0) {
-                iterationCount++;
+                numIterations++;
                 System.out.printf("%5d", i);
             }
-            if (iterationCount == elementsString) {
+            if (numIterations == numbersInLine) {
                 System.out.println();
-                iterationCount = 0;
+                numIterations= 0;
             }
         }
-        if (iterationCount < elementsString && iterationCount != 0) {
-            for (int i = 0; i < elementsString - iterationCount; i++) {
+        if (numIterations < numbersInLine && numIterations!= 0) {
+            for (int i = 0; i < numbersInLine - numIterations; i++) {
                 System.out.printf("%5d", 0);
             }
         }
@@ -111,20 +111,20 @@ public class CyclesTheme {
             stringCount--;
         }
         System.out.println();
-        int heightTriangle = 3;
-        int quantityStrings = 2 * heightTriangle - 1;
+        int triangleHeight = 3;
+        int stringsQuantity = 2 * triangleHeight - 1;
         int stringsCount = 1;
-        int decreaseWidthString = 1;
-        int widthString = 1;
+        int stringWidthDecrease = 1;
+        int stringWidth = 1;
         do {
-            int counterElemString = 0;
+            int elemStringCounter = 0;
             do {
                 System.out.print("$");
-            } while (++counterElemString < widthString);
+            } while (++elemStringCounter < stringWidth);
             System.out.println();
-            if (stringsCount == heightTriangle) decreaseWidthString = -1;
-            widthString += decreaseWidthString;
-        } while (++stringsCount <= quantityStrings);
+            if (stringsCount == triangleHeight) stringWidthDecrease = -1;
+            stringWidth += stringWidthDecrease;
+        } while (++stringsCount <= stringsQuantity);
 
         System.out.println("\n7. Вывод ASCII-символов");
         System.out.println("DECIMAL     " + "CHARACTER    " + "DESCRIPTION");
@@ -141,27 +141,27 @@ public class CyclesTheme {
 
         System.out.println("\n8. Проверка, является ли число палиндромом");
         originNumber = 1234321;
-        int sumReverse = 0;
+        int reversedNumber = 0;
         currentNumber = originNumber;
         while (currentNumber > 0) {
             int lastDigit = currentNumber % 10;
-            sumReverse = (sumReverse * 10) + lastDigit;
+            reversedNumber  = (reversedNumber * 10) + lastDigit;
             currentNumber = currentNumber / 10;
         }
-        if (sumReverse == originNumber) {
+        if (reversedNumber  == originNumber) {
             System.out.println("Number " + originNumber + " palindrome");
         } else {
             System.out.println("Number " + originNumber + " not palindrome");
         }
 
         System.out.println("\n9. Проверка, является ли число счастливым");
-        originNumber = 123321;
+        originNumber = 133321;
         currentNumber = originNumber;
-        int counterDigits = 6;
+        int digitsCounter = 6;
         int sum1 = 0;
         int sum2 = 0;
-        for (int i = 1; i <= counterDigits; i++) {
-            if (i <= counterDigits / 2) {
+        for (int i = 0; i < digitsCounter; i++) {
+            if (i < digitsCounter / 2) {
                 sum1 += currentNumber % 10;
                 currentNumber /= 10;
             } else {

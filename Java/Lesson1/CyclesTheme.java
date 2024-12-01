@@ -64,10 +64,10 @@ public class CyclesTheme {
             }
             if (numIterations == numbersInLine) {
                 System.out.println();
-                numIterations= 0;
+                numIterations = 0;
             }
         }
-        if (numIterations < numbersInLine && numIterations!= 0) {
+        if (numIterations < numbersInLine && numIterations != 0) {
             for (int i = 0; i < numbersInLine - numIterations; i++) {
                 System.out.printf("%5d", 0);
             }
@@ -84,10 +84,10 @@ public class CyclesTheme {
             currentNumber /= 10;
         }
         if (tensCount % 2 != 0) {
-            System.out.println("В " + currentNumber + " нечетное " + "(" + tensCount + ")" +
+            System.out.println("В " + originNumber + " нечетное " + "(" + tensCount + ")" +
                     " количество двоек");
         } else {
-            System.out.println("В " + currentNumber + " четное " + "(" + tensCount + ")" +
+            System.out.println("В " + originNumber + " четное " + "(" + tensCount + ")" +
                     " количество двоек");
         }
 
@@ -145,10 +145,10 @@ public class CyclesTheme {
         currentNumber = originNumber;
         while (currentNumber > 0) {
             int lastDigit = currentNumber % 10;
-            reversedNumber  = (reversedNumber * 10) + lastDigit;
+            reversedNumber = (reversedNumber * 10) + lastDigit;
             currentNumber = currentNumber / 10;
         }
-        if (reversedNumber  == originNumber) {
+        if (reversedNumber == originNumber) {
             System.out.println("Number " + originNumber + " palindrome");
         } else {
             System.out.println("Number " + originNumber + " not palindrome");
@@ -159,19 +159,25 @@ public class CyclesTheme {
         currentNumber = originNumber;
         int digitsCounter = 6;
         int sum1 = 0;
+        int numbersRight = 0;
+        int numbersLeft = 0;
         int sum2 = 0;
         for (int i = 0; i < digitsCounter; i++) {
             if (i < digitsCounter / 2) {
                 sum1 += currentNumber % 10;
+                int lastDigit = currentNumber % 10;
                 currentNumber /= 10;
+                numbersRight = (numbersRight * 10) + lastDigit;
             } else {
                 sum2 += currentNumber % 10;
+                int lastDigit = currentNumber % 10;
                 currentNumber /= 10;
+                numbersLeft = (numbersLeft * 10) + lastDigit;
             }
         }
-        String result = sum1 == sum2 ? "Число " + originNumber + " - счастливое\n" + "Сумма цифр 123 = " +
-                sum1 + "\n" + "Сумма цифр 321 = " + sum2 : "Число не счастливое";
-        System.out.println(result);
+        String result = sum1 == sum2 ? " счастливое " : " не счастливое";
+        System.out.println("Число " + originNumber + result + "\nСумма цифр " + numbersRight + " = " +
+                sum1 + "\n" + "Сумма цифр " + numbersLeft + " = " + sum2);
 
         System.out.println("\n10. Вывод таблицы умножения Пифагора");
         System.out.printf("%26s%n%n", "Таблица Пифагора");

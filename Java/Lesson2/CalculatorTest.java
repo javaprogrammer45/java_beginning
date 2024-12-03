@@ -1,21 +1,20 @@
 package Lesson2;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calc = new Calculator();
         Scanner sc = new Scanner(System.in);
-        String answer = "";
-
+        String answer;
+        long firstNumber;
         do {
             System.out.println("Enter the first number: ");
-            long firstNumber = sc.nextLong();
+            firstNumber = sc.nextLong();
             System.out.println("Enter the operation sign: +, -, *, /, ^, %");
             char operationSign = sc.next().charAt(0);
-            while (operationSign != '+' || operationSign != '-' || operationSign != '*' ||
-                    operationSign != '/' ||
-                    operationSign != '^' || operationSign != '%') {
+            while (true) {
                 if (operationSign == '+' || operationSign == '-' || operationSign == '*' ||
                         operationSign == '/' ||
                         operationSign == '^' || operationSign == '%') {
@@ -34,40 +33,14 @@ public class CalculatorTest {
                 secondNumber = sc.nextLong();
             }
 
-            switch (operationSign) {
-                case '+':
-                    long result = calc.addition(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-                case '-':
-                    result = calc.subtracting(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-                case '*':
-                    result = calc.multiplication(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-                case '/':
-                    result = calc.division(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-                case '^':
-                    result = calc.exponentiation(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-                case '%':
-                    result = calc.gettingRemainderDivision(firstNumber, secondNumber);
-                    System.out.println(result);
-                    break;
-            }
+            calc.calculations(firstNumber, secondNumber, operationSign);
+
             System.out.println("Хотите продолжить вычисления?");
-            answer = sc.next();
-            if (answer.equalsIgnoreCase("no")) {
+            answer = sc.next().toLowerCase();
+            if (answer.equals("no")) {
                 break;
-            } else if (!answer.equalsIgnoreCase("yes") &&
-                    !answer.equalsIgnoreCase("no")) {
-                while (!answer.equalsIgnoreCase("yes") &&
-                        !answer.equalsIgnoreCase("no")) {
+            } else if (!answer.equals("yes") && !answer.equals("no")) {
+                while (!answer.equals("yes") && !answer.equals("no")) {
                     System.out.println("Хотите продолжить вычисления?");
                     answer = sc.next();
                 }

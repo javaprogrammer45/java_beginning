@@ -1,6 +1,5 @@
-package Lesson2;
+package Lesson_2_3.calculator;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class CalculatorTest {

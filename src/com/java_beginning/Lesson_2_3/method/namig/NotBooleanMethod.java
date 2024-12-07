@@ -1,4 +1,4 @@
-package Lesson2;
+package Lesson_2_3.method.namig;
 
 public class NotBooleanMethod {
     //Не boolean-методы

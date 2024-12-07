@@ -1,4 +1,4 @@
-package Lesson1;
+package Lesson1.base;
 
 public class CyclesTheme {
     public static void main(String[] args) {

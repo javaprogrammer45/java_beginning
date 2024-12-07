@@ -1,4 +1,4 @@
-package Lesson2;
+package Lesson_2_3.calculator;
 
 public class Calculator {
     public int calculate(int firstNumber, int secondNumber, char sign) {

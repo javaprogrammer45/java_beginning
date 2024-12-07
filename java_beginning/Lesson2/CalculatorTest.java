@@ -34,12 +34,10 @@ public class CalculatorTest {
 
             calc.calculate(firstNumber, secondNumber, operationSign);
 
-            System.out.println("Хотите продолжить вычисления?");
-            answer = sc.next().toLowerCase();
-            if (!answer.equals("yes") && !answer.equals("no")) {
+            do {
                 System.out.println("Хотите продолжить вычисления?");
                 answer = sc.next().toLowerCase();
-            }
+            } while (!answer.equals("yes") && !answer.equals("no"));
         } while (answer.equalsIgnoreCase("yes"));
     }
 }

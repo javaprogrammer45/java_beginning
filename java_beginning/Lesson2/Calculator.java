@@ -53,9 +53,7 @@ public class Calculator {
         for (int i = 1; i <= b; i++) {
             result *= a;
         }
-        if (b < 0) {
-            return 1 / result;
-        }
+        result = b < 0 ? 1 / result : result;
         return result;
     }
 

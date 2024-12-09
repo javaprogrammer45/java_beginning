@@ -1,7 +1,7 @@
 package com.java_beginning.lesson_2_3.method.naming;
 
 public class Main {
-    private void execNonBooleanMethod() {
+    private void execNonBooleanMethods() {
         NonBooleanMethods nonBm = new NonBooleanMethods();
         nonBm.findLongestWord();
         nonBm.selectMenuItem();
@@ -19,33 +19,23 @@ public class Main {
         nonBm.findBookByAuthor();
     }
 
-    private void execBooleanMethod() {
+    private void execBooleanMethods() {
         BooleanMethods bm = new BooleanMethods();
-        boolean shouldContinue = bm.shouldContinue();
-        System.out.println(shouldContinue);
-        boolean isDeleteFile = bm.isDeletedFile();
-        System.out.println(isDeleteFile);
-        boolean hasUniqueDigit = bm.hasUniqueDigit();
-        System.out.println(hasUniqueDigit);
-        boolean isLetter = bm.isLetter();
-        System.out.println(isLetter);
-        boolean hasEqualDigits = bm.hasEqualDigits();
-        System.out.println(hasEqualDigits);
-        boolean isAttempts  = bm.isAttempts();
-        System.out.println(isAttempts);
-        boolean isEmptyString = bm.isEmptyString();
-        System.out.println(isEmptyString);
-        boolean isEvenNumber = bm.isEvenNumber();
-        System.out.println(isEvenNumber);
-        boolean isValidPath = bm.isValidPath();
-        System.out.println(isValidPath);
-        boolean isExistsFile = bm.isExistsFile();
-        System.out.println(isExistsFile);
+        System.out.println(bm.shouldContinue());
+        System.out.println(bm.isDeletedFile());
+        System.out.println(bm.hasUniqueDigit());
+        System.out.println(bm.isLetter());
+        System.out.println(bm.hasEqualDigits());
+        System.out.println(bm.isAttempts());
+        System.out.println(bm.isEmptyString());
+        System.out.println(bm.isEvenNumber());
+        System.out.println(bm.isValidPath());
+        System.out.println(bm.isExistsFile());
     }
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.execNonBooleanMethod();
-        main.execBooleanMethod();
+        main.execNonBooleanMethods();
+        main.execBooleanMethods();
     }
 }

@@ -2,10 +2,7 @@ package com.java_beginning.lesson_2_3.guess;
 
 public class Player {
     private String name;
-    int number;
-
-    public Player() {
-    }
+    private int number;
 
     public Player(String name) {
         this.name = name;

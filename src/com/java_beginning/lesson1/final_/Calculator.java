@@ -1,4 +1,4 @@
-package com.java_beginnin.lesson1.final_;
+package com.java_beginning.lesson1.final_;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;

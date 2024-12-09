@@ -17,7 +17,7 @@ public class NonBooleanMethods {
         System.out.println(Method.getCurrName() + "() -> вычислить среднее значение оценок в школе №1234");
     }
 
-    public void countNumberUniqueWords() {
+    public void countUniqueWords() {
         System.out.println(Method.getCurrName() + "() -> подсчитать количество уникальных" +
                 " слов в \"Война и Мир\"");
     }
@@ -26,7 +26,7 @@ public class NonBooleanMethods {
         System.out.println(Method.getCurrName() + "() -> вывести сообщение об ошибке");
     }
 
-    public void synchronizeData() {
+    public void sync() {
         System.out.println(Method.getCurrName() + "() -> синхронизировать данные с облачным хранилищем");
     }
 
@@ -43,27 +43,27 @@ public class NonBooleanMethods {
         System.out.println(Method.getCurrName() + "() -> сбросить настройки до заводских для пылесоса Mi");
     }
 
-    public void writeContents() {
+    public void writeToFile() {
         System.out.println(Method.getCurrName() + "() -> записать содержимое в файл по" +
                 " указанному пути на флешку");
     }
 
-    public void convertTemperature() {
+    public void toFahrenheit() {
         System.out.println(Method.getCurrName() + "() -> преобразовать температуру" +
                 " из Цельсия в Фаренгейт");
     }
 
-    public void enterMathematicalExpression() {
+    public void enterMathExpr() {
         System.out.println(Method.getCurrName() + "() -> ввести математическое выражение с" +
                 " тремя аргументами");
     }
 
-    public void identifyWinner() {
+    public void determineWinner() {
         System.out.println(Method.getCurrName() + "() -> выявить победителя среди гонщиков игры" +
                 " \"Need For Speed\"");
     }
 
-    public void findBook() {
+    public void findBookByAuthor() {
         System.out.println(Method.getCurrName() + "() -> найти книгу по имени писателя\n");
     }
 }

@@ -1,6 +1,12 @@
 package com.java_beginning.lesson_2_3.method.naming;
 
 public class Main {
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.execNonBooleanMethods();
+        main.execBooleanMethods();
+    }
+
     private void execNonBooleanMethods() {
         NonBooleanMethods nonBm = new NonBooleanMethods();
         nonBm.findLongestWord();
@@ -31,11 +37,5 @@ public class Main {
         System.out.println(bm.isEvenNumber());
         System.out.println(bm.isValidPath());
         System.out.println(bm.isExistsFile());
-    }
-
-    public static void main(String[] args) {
-        Main main = new Main();
-        main.execNonBooleanMethods();
-        main.execBooleanMethods();
     }
 }

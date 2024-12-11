@@ -1,3 +1,4 @@
 *.idea
 startjava_checks (1).xml
 out
+bin

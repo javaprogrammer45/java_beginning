@@ -44,7 +44,7 @@ public class RpsGameFormatting {
         if (position > 66) {
             sign = ROCK;
         } else if (position > 33) {
-            sign = ROCK;
+            sign = SCISSORS;
         }
         return sign;
     }

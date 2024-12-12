@@ -22,9 +22,7 @@ public class Factorial {
                 System.out.print(varargs[i] + " = ");
                 for (int j = 1; j <= varargs[i]; j++) {
                     result *= j;
-                    if (j != varargs[i]) {
-                        System.out.print(j + " * ");
-                    }
+                    System.out.print((j != varargs[i]) ? j + " * " : "");
                 }
                 System.out.print(varargs[i] + "\n");
             }

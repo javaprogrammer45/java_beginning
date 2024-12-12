@@ -1,4 +1,4 @@
-package com.java_beginning.lesson_2_3.calculator;
+package com.java_beginning.lesson_2_3_4.calculator;
 
 public class Calculator {
     public void calculate(int firstNumber, int secondNumber, char sign) {

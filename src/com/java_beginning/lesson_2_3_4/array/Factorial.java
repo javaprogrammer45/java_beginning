@@ -1,7 +1,19 @@
 package com.java_beginning.lesson_2_3_4.array;
 
 public class Factorial {
-    int[] nullArray;
+    public static void main(String[] args) {
+        Factorial factorial = new Factorial();
+
+        int[] zeroArray = new int[0];
+        int[] firstArray = {8, 0, 9};
+        int[] secondArray = {-3, 1, 7, 13};
+        int[] thirdArray = {-22, -0};
+
+        factorial.calculateFactorial(zeroArray);
+        factorial.calculateFactorial(firstArray);
+        factorial.calculateFactorial(secondArray);
+        factorial.calculateFactorial(thirdArray);
+    }
 
     public void calculateFactorial(int... varargs) {
         int[] newArray;
@@ -29,19 +41,5 @@ public class Factorial {
             varargs[i] = result;
         }
         newArray = varargs;
-    }
-
-    public static void main(String[] args) {
-        Factorial factorial = new Factorial();
-
-        int[] zeroArray = new int[0];
-        int[] firstArray = {8, 0, 9};
-        int[] secondArray = {-3, 1, 7, 13};
-        int[] thirdArray = {-22, -0};
-
-        factorial.calculateFactorial(zeroArray);
-        factorial.calculateFactorial(firstArray);
-        factorial.calculateFactorial(secondArray);
-        factorial.calculateFactorial(thirdArray);
     }
 }

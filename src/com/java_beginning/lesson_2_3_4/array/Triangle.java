@@ -8,36 +8,21 @@ public class Triangle {
     private final int startUppercaseLetters = 65;
     private final int endUppercaseLetters = 90;
 
-
     public Triangle() {
-    }
-
-
-    public int getStartChars() {
-        return startChars;
     }
 
     public int getEndChars() {
         return endChars;
     }
 
-    public int getStartNumbers() {
-        return startNumbers;
-    }
-
     public int getEndNumbers() {
         return endNumbers;
-    }
-
-    public int getStartUppercaseLetters() {
-        return startUppercaseLetters;
     }
 
     public int getEndUppercaseLetters() {
         return endUppercaseLetters;
     }
-
-
+    
     public static void main(String[] args) {
         Triangle triangle = new Triangle();
         triangle.displayTriangle(50,46);

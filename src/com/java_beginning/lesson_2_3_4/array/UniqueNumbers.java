@@ -13,30 +13,6 @@ public class UniqueNumbers {
         uniqueNumbers.printArray(uniqueNumbers.sortArray(uniqueNumbers.fillingArray(5, -8, 2)));
     }
 
-    public void printArray(int[] arr) {
-        if (arr.length != 0) {
-            System.out.println(Arrays.toString(arr) + "\n");
-        }
-    }
-
-    public int[] sortArray(int[] arr) {
-        if (arr != null) {
-            for (int i = 0; i < arr.length - 1; i++) {
-                for (int j = 0; j < arr.length - 1 - i; j++) {
-                    if (arr[j] > arr[j + 1]) {
-                        int temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
-                }
-            }
-        } else {
-            return new int[0];
-        }
-
-        return arr;
-    }
-
     public int[] fillingArray(int start, int end, int lengthString) {
         if (lengthString <= 0 || lengthString == 0) {
             System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" +
@@ -65,5 +41,29 @@ public class UniqueNumbers {
             return null;
         }
         return array1;
+    }
+
+    public int[] sortArray(int[] arr) {
+        if (arr != null) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                for (int j = 0; j < arr.length - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        int temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+        } else {
+            return new int[0];
+        }
+
+        return arr;
+    }
+
+    private void printArray(int[] arr) {
+        if (arr.length != 0) {
+            System.out.println(Arrays.toString(arr) + "\n");
+        }
     }
 }

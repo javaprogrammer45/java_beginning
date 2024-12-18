@@ -17,6 +17,24 @@ public class Factorial {
         factorial.printFactorials(factorial.calculateFactorial(thirdArray));
     }
 
+    public int[] calculateFactorial(int... varargs) {
+        if (varargs == null) {
+            return null;
+        }
+        int[] array = varargs;
+        int[] arr = new int[varargs.length];
+        if (array.length == 0) {
+            System.out.println("массив нулевой длины");
+        }
+        int len = 0;
+        for (int num : array) {
+            if (num != 0 && num != 1 && num > 0) {
+                arr[len++] = num;
+            }
+        }
+        return arr;
+    }
+
     public void printFactorials(int[] array) {
         if (array == null) {
             System.out.println("null");
@@ -37,23 +55,5 @@ public class Factorial {
                 }
             }
         }
-    }
-
-    public int[] calculateFactorial(int... varargs) {
-        if (varargs == null) {
-            return null;
-        }
-        int[] array = varargs;
-        int[] arr = new int[varargs.length];
-        if (array.length == 0) {
-            System.out.println("массив нулевой длины");
-        }
-        int len = 0;
-        for (int num : array) {
-            if (num != 0 && num != 1 && num > 0) {
-                arr[len++] = num;
-            }
-        }
-        return arr;
     }
 }

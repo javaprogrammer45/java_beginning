@@ -16,7 +16,7 @@ public class Reverser {
         reverser.printReversedArrays(twoArray, reverser.reverse(twoArray));
     }
 
-    private int[] reverse(int[] values) {
+    public int[] reverse(int[] values) {
         if (values == null) {
             System.out.println("null");
             return null;
@@ -32,7 +32,7 @@ public class Reverser {
         return reversedValues;
     }
 
-    public void printReversedArrays(int[] arr1, int[] arr2) {
+    private void printReversedArrays(int[] arr1, int[] arr2) {
         if (arr1 == null || arr2 == null || arr1.length == 0 || arr2.length == 0) {
             return;
         }

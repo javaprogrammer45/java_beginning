@@ -22,7 +22,7 @@ public class Triangle {
     public int getEndUppercaseLetters() {
         return endUppercaseLetters;
     }
-    
+
     public static void main(String[] args) {
         Triangle triangle = new Triangle();
         triangle.displayTriangle(50,46);

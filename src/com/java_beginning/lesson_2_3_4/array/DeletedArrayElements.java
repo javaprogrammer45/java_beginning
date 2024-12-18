@@ -11,17 +11,17 @@ public class DeletedArrayElements {
 
     public void overwritingValues(int number) {
         float[] array = new float[15];
-        boolean value = false;
+        boolean isValue = false;
         float digit = 0;
 
         System.out.print("Исходный массив: [");
         for (int i = 0; i < array.length; i++) {
             array[i] = (float) Math.random();
             if (i == number) {
-                value = false;
+                isValue = false;
                 digit = array[i];
             } else if (i != number) {
-                value = true;
+                isValue = true;
             }
 
             if (i <= array.length / 2) {
@@ -42,9 +42,9 @@ public class DeletedArrayElements {
             }
         }
 
-        System.out.print((value == false) ? "Значение из ячейки по переданному индексу - " :
+        System.out.print((isValue == false) ? "Значение из ячейки по переданному индексу - " :
                 "Значения не обнулялись\n");
-        if (value == false) {
+        if (isValue == false) {
             System.out.printf("%.3f%s", digit, " \n");
         }
 

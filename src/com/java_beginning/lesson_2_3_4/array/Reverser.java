@@ -20,13 +20,14 @@ public class Reverser {
         if (values == null) {
             System.out.println("null");
             return null;
-        } else if (values.length == 0) {
+        }
+        if (values.length == 0) {
             System.out.println("массив нулевой длины");
         }
         int[] reversedValues = new int[values.length];
-        int index = 0;
+        int len = reversedValues.length;
         for (int number : values) {
-            reversedValues[reversedValues.length - 1 - index++] = number;
+            reversedValues[--len] = number;
         }
         return reversedValues;
     }
@@ -35,7 +36,7 @@ public class Reverser {
         if (arr1 == null || arr2 == null || arr1.length == 0 || arr2.length == 0) {
             return;
         }
-        System.out.print("\nДо реверса: " + Arrays.toString(arr1) +
+        System.out.print("\nДо реверса:    " + Arrays.toString(arr1) +
                 "\nПосле реверса: " + Arrays.toString(arr2) + "\n");
     }
 }

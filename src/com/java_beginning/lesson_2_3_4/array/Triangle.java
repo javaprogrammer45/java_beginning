@@ -1,37 +1,15 @@
 package com.java_beginning.lesson_2_3_4.array;
 
 public class Triangle {
-    private final int startChars = 33;
-    private final int endChars = 47;
-    private final int startNumbers = 48;
-    private final int endNumbers = 57;
-    private final int startUppercaseLetters = 65;
-    private final int endUppercaseLetters = 90;
-
-    public Triangle() {
-    }
-
-    public int getEndChars() {
-        return endChars;
-    }
-
-    public int getEndNumbers() {
-        return endNumbers;
-    }
-
-    public int getEndUppercaseLetters() {
-        return endUppercaseLetters;
-    }
-
     public static void main(String[] args) {
         Triangle triangle = new Triangle();
-        triangle.displayTriangle(50,46);
+        triangle.printTriangle(48,57);
     }
 
-    public void displayTriangle(int start, int end) {
+    public void printTriangle(int start, int end) {
         StringBuilder stringBuilder = new StringBuilder();
-        boolean direction = (start < end && end == getEndChars() || end == getEndNumbers() || end == getEndUppercaseLetters());
-        if (direction) {
+        boolean isIncrease = (start < end);
+        if (isIncrease) {
             int size = end - start;
             for (int i = 1; i <= size + 1; i++) {
                 for (int j = 1; j <= size + 1 - i; j++) {
@@ -49,7 +27,7 @@ public class Triangle {
                 end--;
                 System.out.println();
             }
-        } else if (!direction) {
+        } else if (!isIncrease) {
             if (start > end) {
                 System.out.println("Ошибка: левая граница " + start + " > правой " + end);
             } else {

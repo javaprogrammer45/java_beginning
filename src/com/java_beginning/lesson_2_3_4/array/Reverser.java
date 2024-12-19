@@ -10,13 +10,13 @@ public class Reverser {
         int[] oneArray = {6, 8, 9, 1};
         int[] twoArray = {13, 8, 5, 3, 2, 1, 1};
 
-        reverser.printReversedArrays(zeroArray, reverser.reverse(zeroArray));
-        reverser.printReversedArrays(nullArray, reverser.reverse(nullArray));
-        reverser.printReversedArrays(oneArray, reverser.reverse(oneArray));
-        reverser.printReversedArrays(twoArray, reverser.reverse(twoArray));
+        reverser. printArrays(zeroArray, reverser.reverse(zeroArray));
+        reverser. printArrays(nullArray, reverser.reverse(nullArray));
+        reverser. printArrays(oneArray, reverser.reverse(oneArray));
+        reverser. printArrays(twoArray, reverser.reverse(twoArray));
     }
 
-    public int[] reverse(int[] values) {
+    private int[] reverse(int[] values) {
         if (values == null) {
             System.out.println("null");
             return null;
@@ -32,7 +32,7 @@ public class Reverser {
         return reversedValues;
     }
 
-    private void printReversedArrays(int[] arr1, int[] arr2) {
+    private void printArrays(int[] arr1, int[] arr2) {
         if (arr1 == null || arr2 == null || arr1.length == 0 || arr2.length == 0) {
             return;
         }

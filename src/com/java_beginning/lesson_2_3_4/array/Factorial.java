@@ -6,21 +6,20 @@ public class Factorial {
     public static void main(String[] args) {
         Factorial factorial = new Factorial();
 
-
         int[] zeroArray = new int[0];
         int[] nullArray = null;
         int[] firstArray = {8, 0, 9};
         int[] secondArray = {-3, 1, 7, 13};
         int[] thirdArray = {-22, -0};
 
-        factorial.printFactorialsExpr(factorial.calcFactorials(zeroArray));
-        factorial.printFactorialsExpr(factorial.calcFactorials(nullArray));
-        factorial.printFactorialsExpr(factorial.calcFactorials(firstArray));
-        factorial.printFactorialsExpr(factorial.calcFactorials(secondArray));
-        factorial.printFactorialsExpr(factorial.calcFactorials(thirdArray));
+        factorial.calcFactorials(factorial.checkArray(zeroArray));
+        factorial.calcFactorials(factorial.checkArray(nullArray));
+        factorial.calcFactorials(factorial.checkArray(firstArray));
+        factorial.calcFactorials(factorial.checkArray(secondArray));
+        factorial.calcFactorials(factorial.checkArray(thirdArray));
     }
 
-    public int[] calcFactorials(int... array) {
+    public int[] checkArray(int... array) {
         if (array == null) {
             System.out.println("null");
             return null;
@@ -42,36 +41,38 @@ public class Factorial {
         return newArray;
     }
 
-    public void printFactorialsExpr(int[] array) {
-        BigInteger bigInteger1 = BigInteger.valueOf(1);
+    public void calcFactorials(int[] array) {
+        BigInteger number1 = BigInteger.valueOf(1);
         if (array != null) {
-            long result = 1;
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] != 0) {
-                    if (array[i] == 1) {
-                        result = 1;
-                        System.out.print(array[i] + "!= " + result + "\n");
+            for (int j : array) {
+                if (j != 0) {
+                    if (j == 1) {
+                        int result = 1;
+                        System.out.print(j + "!= " + result + "\n");
                         continue;
                     }
-//                    if (array[i] >= 13) {
-//                       // BigInteger bigInteger2 = BigInteger.valueOf(array[i]);
-//                    }
-                    System.out.print(array[i] + "!= ");
-                    for (int j = 1; j <= array[i]; j++) {
-                        if (array[i] < 13) {
-                            result *= j;
-                        } else {
-                            BigInteger bigInteger3 = BigInteger.valueOf(j);
-                            bigInteger1 = bigInteger1.multiply(bigInteger3);
-                            result = bigInteger1.longValue();
-                        }
-                        if (j != array[i]) {
-                            System.out.print(j + " * ");
-                        } else {
-                            System.out.print(array[i] + " = " + result + "\n");
-                        }
-                    }
+                    System.out.print(j + "!= ");
+                    printFactorialsExpr(j, number1);
                 }
+            }
+        }
+    }
+
+    public void printFactorialsExpr(int element, BigInteger number1) {
+        long result = 1;
+
+        for (int j = 1; j <= element; j++) {
+            if (element < 13) {
+                result *= j;
+            } else {
+                BigInteger number_j = BigInteger.valueOf(j);
+                number1 = number1.multiply(number_j);
+                result = number1.longValue();
+            }
+            if (j != element) {
+                System.out.print(j + " * ");
+            } else {
+                System.out.print(element + " = " + result + "\n");
             }
         }
     }

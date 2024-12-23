@@ -10,10 +10,10 @@ public class Reverser {
         int[] oneArray = {6, 8, 9, 1};
         int[] twoArray = {13, 8, 5, 3, 2, 1, 1};
 
-        reverser. printArrays(zeroArray, reverser.reverse(zeroArray));
-        reverser. printArrays(nullArray, reverser.reverse(nullArray));
-        reverser. printArrays(oneArray, reverser.reverse(oneArray));
-        reverser. printArrays(twoArray, reverser.reverse(twoArray));
+        reverser.printArrays(zeroArray, reverser.reverse(zeroArray));
+        reverser.printArrays(nullArray, reverser.reverse(nullArray));
+        reverser.printArrays(oneArray, reverser.reverse(oneArray));
+        reverser.printArrays(twoArray, reverser.reverse(twoArray));
     }
 
     private int[] reverse(int[] values) {

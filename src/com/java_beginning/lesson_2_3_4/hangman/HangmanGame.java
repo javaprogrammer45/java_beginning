@@ -1,33 +1,17 @@
 package com.java_beginning.lesson_2_3_4.hangman;
 
-import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class HangmanGame {
     private String[] words = {"Яблоко", "Хлеб", "Сало", "Сыр", "Сок"};
-    private String[] stringsHang = {"{\"________\",", "\"|     |\",", "\"|     @\",", "\"|    /|\\\\\",", "\"|    / \\\\\",", "\"| GAME OVER!\"", "};"};
-
-
-    public HangmanGame() {
-    }
-
-    public HangmanGame(String[] words, String[] stringsHang) {
-        this.words = words;
-        this.stringsHang = stringsHang;
-    }
+    private String[] stringsHang = {" ", "{\"________\",", "\"|     |\",", "\"|     @\",", "\"|    /|\\\\\",", "\"|    / \\\\\",", "\"| GAME OVER!\"", "};"};
 
     public String[] getWords() {
         return words;
     }
 
-    public String[] getStringsHang() {
-        return stringsHang;
-    }
-
-    public char[] start(String[] words) {
-
+    public void start(String[] words) {
         SecureRandom random = new SecureRandom();
         String randomWord = words[random.nextInt(words.length)];
         System.out.println(randomWord);
@@ -37,49 +21,81 @@ public class HangmanGame {
         }
         String mask = new String(elements);
         System.out.println("Введите букву...\n" + mask);
-        char[] array =randomWord.toCharArray();
-        return array;
-    }
-
-    public char[] guessWord(char[] array) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        char letter = scanner.next().toUpperCase().charAt(0);
-        String string = new String(new char[]{letter});
-        int attempts= array.length;
-
-        int counter = 0;
+        StringBuilder builder = new StringBuilder();
+        builder.append(elements);
+        int attempts = stringsHang.length;
+        int counter = 1;
         do {
+            attempts--;
+            Scanner scanner = new Scanner(System.in);
+            char letter = scanner.next().toUpperCase().charAt(0);
+            String string = String.valueOf(letter);
 
-            for (int i = counter; i < array.length; i++) {
+            int result = builder.toString().toLowerCase().indexOf(string.toLowerCase());
 
-                attempts--;
-                if (i != 0) {
-                    if (string.toLowerCase().charAt(0) != array[i]) {
-                        array[i] = '*';
+            if (Character.UnicodeBlock.of(string.charAt(0)).equals(Character.UnicodeBlock.CYRILLIC)) {
+                if (isGuess(string, randomWord)) {
+                    attempts++;
+                    counter--;
+                    if (result == -1) {
+                        for (int i = 0; i < randomWord.length(); i++) {
+                            String newRandomWord = randomWord.toUpperCase();
+
+                            if (newRandomWord.charAt(i) == letter) {
+                                builder.deleteCharAt(i).insert(i, letter);
+                            }
+                        }
+                        if (counter > 0) {
+                            counter--;
+                            System.out.print(attempts + " ");
+                            System.out.println(builder + "           " + stringsHang[counter]);
+                        } else {
+                            System.out.print(attempts + " ");
+                            System.out.println(builder);
+                        }
+                    } else {
+                        System.out.print("Такой символ уже есть в строке...\nВведите букву...\n");
+                        continue;
                     }
-                } else {
-                    if (string.charAt(0) != array[i]) {
-                            array[i] = '*';
+                } else if (!isGuess(string, randomWord)) {
+                    if (counter > 0) {
+                        System.out.print(attempts + " ");
+                        System.out.println(letter + "           " + stringsHang[counter]);
+                        counter++;
+                    } else if (counter <= 0) {
+                        counter = 1;
+                        System.out.print(attempts + " ");
+                        System.out.println(letter + "           " + stringsHang[counter]);
+                        counter++;
                     }
                 }
+            } else {
+                System.out.print("Символ не кириллический...\nВведите букву...\n");
+                continue;
             }
-            counter++;
-        }while (attempts!=0);
-
-        return array;
+            if (randomWord.toUpperCase().equals(builder.toString().toUpperCase())) {
+                System.out.println("You won!!!");
+                return;
+            }
+            if (attempts == 0) {
+                System.out.println("You lost!!!");
+                return;
+            }
+        } while (attempts > 1 || attempts < stringsHang.length);
     }
 
-    public void printLetters(char[] letters) throws IOException {
-        for (int i = 0; i < letters.length; i++) {
-            System.out.print(letters[i] + " ");
-
+    public boolean isGuess(String letter, String randomWord) {
+        for (int j = 0; j < randomWord.length(); j++) {
+            if (j != 0) {
+                if (randomWord.toLowerCase().charAt(j) == letter.toLowerCase().charAt(0)) {
+                    return true;
+                }
+            } else if (j == 0) {
+                if (randomWord.charAt(j) == letter.charAt(0)) {
+                    return true;
+                }
+            }
         }
-
-    }
-
-    public void printHang(String[] stringsHang, int attempt) throws IOException {
-        for (int i = 0; i < stringsHang.length; i++) {
-            System.out.println(stringsHang[i]);
-        }
+        return false;
     }
 }

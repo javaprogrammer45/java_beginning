@@ -1,23 +1,24 @@
 package com.java_beginning.lesson_2_3_4.hangman;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class HangmanGameMain {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         HangmanGame hangmanGame = new HangmanGame();
-        char[] lettersMask = hangmanGame.start(hangmanGame.getWords());
-        char[] letters = new char[lettersMask.length];
-        int attempts = 0;
+        Scanner scanner = new Scanner(System.in);
         do {
+            hangmanGame.start(hangmanGame.getWords());
+            System.out.println("Вы хотите продолжить? yes/no");
 
-            hangmanGame.printLetters(hangmanGame.guessWord(lettersMask));
-
-
-            attempts++;
-        } while (attempts < hangmanGame.getStringsHang().length);
-
-
+            String input = scanner.nextLine().toLowerCase();
+            if (!input.equals("yes") && !input.equals("no")) {
+                System.out.println("Вы хотите продолжить? yes/no");
+                break;
+            } else if (input.equals("yes")) {
+                hangmanGame.start(hangmanGame.getWords());
+            } else {
+                return;
+            }
+        } while (true);
     }
 }

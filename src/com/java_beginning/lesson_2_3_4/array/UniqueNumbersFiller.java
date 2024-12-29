@@ -1,70 +1,68 @@
 package com.java_beginning.lesson_2_3_4.array;
 
 import java.util.Arrays;
+import java.util.Random;
 
-public class UniqueNumbers {
+public class UniqueNumbersFiller {
     public static void main(String[] args) {
-        UniqueNumbers un = new UniqueNumbers();
+        UniqueNumbersFiller un = new UniqueNumbersFiller();
 
-        un.printArray(un.sortArray(un.fillArray(-30, -10, 23)));
-        un.printArray(un.sortArray(un.fillArray(10, 50, 10)));
-        un.printArray(un.sortArray(un.fillArray(-34, -34, 0)));
-        un.printArray(un.sortArray(un.fillArray(-1, 2, -3)));
-        un.printArray(un.sortArray(un.fillArray(5, -8, 2)));
+        un.printArray(un.fillArray(-30, -10, 23));
+        un.printArray(un.fillArray(10, 50, 10));
+        un.printArray(un.fillArray(-34, -34, 0));
+        un.printArray(un.fillArray(5, -8, 2));
     }
 
-    private int[] fillArray(int start, int end, int length) {
-        if (length <= 0 || length == 0) {
+    private int[] fillArray(int start, int end, int lineLen) {
+        if (lineLen <= 0) {
             System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" +
-                    length + ")");
+                    lineLen + ")");
             return null;
         }
         if (start > end) {
             System.out.println("Ошибка: левая граница " + start + " > " + " правой " + end);
             return null;
         }
-        int lenUnsortedArray = (int) ((end - start) * 0.75);
-        int[] unsortedArray = new int[length];
+        int len = (int) ((end - start) * 0.75);
+        int[] uniqueValues = new int[lineLen];
 
-        if ((end - start) != 0) {
-            for (int i = 0; i < unsortedArray.length; i++) {
-                if (i < lenUnsortedArray) {
-                    int number = (int) (Math.random() * (end - start + 1)) + start;
-                    unsortedArray[i] = number;
-                } else {
-                    unsortedArray[i] = unsortedArray[i - lenUnsortedArray];
-                }
-            }
-        } else {
+        if ((end - start) == 0) {
             System.out.println("Ошибка: длина массива должна быть больше 0 (" + (end - start) + ")");
             return null;
         }
-        return unsortedArray;
-    }
 
-    private int[] sortArray(int[] unsortedArray) {
-        if (unsortedArray != null) {
-            for (int i = 0; i < unsortedArray.length - 1; i++) {
-                for (int j = 0; j < unsortedArray.length - 1 - i; j++) {
-                    if (unsortedArray[j] > unsortedArray[j + 1]) {
-                        int temp = unsortedArray[j];
-                        unsortedArray[j] = unsortedArray[j + 1];
-                        unsortedArray[j + 1] = temp;
+        Random random = new Random();
+        boolean isExist = true;
+        int uniqueValue;
+        for (int i = 0; i < uniqueValues.length; i++) {
+            if (i < len) {
+                do {
+                    uniqueValue = random.nextInt(start, end);
+                    for (int value : uniqueValues) {
+                        if (value == uniqueValue) {
+                            isExist = false;
+                            break;
+                        } else {
+                            isExist = true;
+                        }
                     }
-                }
+                } while (!isExist);
+                uniqueValues[i] = uniqueValue;
+            } else {
+                uniqueValues[i] = uniqueValues[i - len];
             }
-        } else {
-            return new int[0];
         }
-
-        return unsortedArray;
+        Arrays.sort(uniqueValues);
+        return uniqueValues;
     }
 
     private void printArray(int[] sortedArray) {
+        if (sortedArray == null) {
+            return;
+        }
         if (sortedArray.length != 0) {
-
             System.out.println(Arrays.toString(sortedArray) +
-                    "  Колличество чисел в строке = " + sortedArray.length + "\n");
+                    "  Количество чисел в строке = " + sortedArray.length + "\n");
         }
     }
 }

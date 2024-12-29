@@ -10,54 +10,58 @@ public class Factorial {
         int[] secondArray = {-3, 1, 7, 13};
         int[] thirdArray = {-22, -0};
 
-        factorial.printFactorials(zeroArray, factorial.calcFactorialsExpr(zeroArray));
-        factorial.printFactorials(nullArray, factorial.calcFactorialsExpr(nullArray));
-        factorial.printFactorials(firstArray, factorial.calcFactorialsExpr(firstArray));
-        factorial.printFactorials(secondArray, factorial.calcFactorialsExpr(secondArray));
-        factorial.printFactorials(thirdArray, factorial.calcFactorialsExpr(thirdArray));
+        factorial.printFactorialsExpr(zeroArray, factorial.calcFactorials(zeroArray));
+        factorial.printFactorialsExpr(nullArray, factorial.calcFactorials(nullArray));
+        factorial.printFactorialsExpr(firstArray, factorial.calcFactorials(firstArray));
+        factorial.printFactorialsExpr(secondArray, factorial.calcFactorials(secondArray));
+        factorial.printFactorialsExpr(thirdArray, factorial.calcFactorials(thirdArray));
     }
 
-    public long[] calcFactorialsExpr(int... array) {
+    private long[] calcFactorials(int... array) {
         if (array == null) {
             System.out.println("null");
             return null;
         }
-        long[] results = new long[array.length];
+        long[] factorials = null;
         if (array.length != 0) {
+            factorials = new long[array.length];
             for (int i = 0; i < array.length; i++) {
                 long start = 1;
-                if (array[i] == 1 || array[i] <= 0) {
-                    results[i] = start;
+                if (array[i] == 1 || array[i] == 0) {
+                    factorials[i] = start;
+                } else if (array[i] < 0) {
+                    factorials[i] = start;
                 } else {
                     for (int j = 1; j <= array[i]; j++) {
                         start *= j;
                     }
-                    results[i] = start;
+                    factorials[i] = start;
                 }
             }
         } else {
             System.out.println("массив нулевой длины");
         }
-        return results;
+        return factorials;
     }
 
-    public void printFactorials(int[] originalArray, long[] factorials) {
-        if (originalArray != null && factorials != null && factorials.length > 0) {
+    private void printFactorialsExpr(int[] originalArray, long[] factorials) {
+        if (factorials != null && factorials.length > 0) {
             for (int i = 0; i < originalArray.length; i++) {
-                int k = originalArray[i];
-                if (k == 1 || k == 0) {
-                    System.out.println(k + "! = 1");
-                    continue;
-                } else if (k < 0) {
-                    System.out.println("Ошибка: факториал " + k + "! не определен");
+                int value = originalArray[i];
+                if (value == 1 || value == 0) {
+                    System.out.println(value + "! = 1");
                     continue;
                 }
-                System.out.print(k + "! = ");
-                for (int j = 1; j <= k; j++) {
-                    if (j != k) {
+                if (value < 0) {
+                    System.out.println("Ошибка: факториал " + value + "! не определен");
+                    continue;
+                }
+                System.out.print(value + "! = ");
+                for (int j = 1; j <= value; j++) {
+                    if (j != value) {
                         System.out.print(j + " * ");
                     } else {
-                        System.out.print(j + " = " + factorials[i] + "\n");
+                        System.out.println(j + " = " + factorials[i]);
                     }
                 }
             }

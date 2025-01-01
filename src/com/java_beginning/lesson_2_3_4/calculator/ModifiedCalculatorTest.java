@@ -8,7 +8,7 @@ public class ModifiedCalculatorTest {
         Scanner sc = new Scanner(System.in);
         String answer;
         do {
-            System.out.println("Введите выражение из трех аргументов, например:   2 ^ 10  (число, знак операции( +, -, *, /, ^, % ),число");
+            System.out.println("Введите выражение из трех аргументов, например:   2 ^ 10  (число, знак операции( +, -, *, /, ^, % ),число)...");
             String enterCalcExp = sc.nextLine();
             calc.calculate(enterCalcExp);
 

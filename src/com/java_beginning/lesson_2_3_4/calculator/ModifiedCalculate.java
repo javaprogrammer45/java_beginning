@@ -1,11 +1,37 @@
 package com.java_beginning.lesson_2_3_4.calculator;
 
+import java.text.DecimalFormat;
+
 public class ModifiedCalculate {
-    public double calculate(String enterCalcExp) {
-        String[] elementsExp = enterCalcExp.split(" ");
-        int firstNumber = Integer.parseInt(elementsExp[0]);
-        char sign = elementsExp[1].charAt(0);
-        int secondNumber = Integer.parseInt(elementsExp[2]);
+    public void calculate(String enterCalcExp) {
+        int firstNumber = 0;
+        int secondNumber = 0;
+        char sign = 0;
+
+        String[] elementsExp = enterCalcExp.split("");
+        for (int i = 0; i < elementsExp.length; i++) {
+            boolean isInteger = elementsExp[i].matches("-?\\d+");
+            boolean isChar = elementsExp[i].matches("[-+*/^%]");
+            if (i == 0 && isInteger) {
+                firstNumber = Integer.parseInt(elementsExp[i]);
+            } else if (i == 0) {
+                System.out.println("Ошибка!!! Введите первое число...");
+                return;
+            }
+            if (i == 1 && isChar) {
+                sign = elementsExp[1].charAt(0);
+            } else if (i == 1) {
+                System.out.println("Ошибка!!! Введите знак из предложенных...");
+                return;
+            }
+            if (i == 2 && isInteger) {
+                secondNumber = Integer.parseInt(elementsExp[i]);
+            } else if (i == 2) {
+                System.out.println("Ошибка!!! Введите второе число...");
+                return;
+            }
+        }
+
         double result = 0;
         switch (sign) {
             case '+':
@@ -27,36 +53,48 @@ public class ModifiedCalculate {
                 result = mod(firstNumber, secondNumber);
                 break;
         }
-        System.out.println(result);
+        printResultCalc(result, firstNumber, secondNumber, sign);
+
+    }
+
+    private double add(int firstNumber, int secondNumber) {
+        return firstNumber + secondNumber;
+    }
+
+    private double subtract(int firstNumber, int secondNumber) {
+        return firstNumber - secondNumber;
+    }
+
+    private double multiply(int firstNumber, int secondNumber) {
+        return firstNumber * secondNumber;
+    }
+
+    private double div(int firstNumber, int secondNumber) {
+        double result = (double) firstNumber / secondNumber;
+        if (Double.isNaN(result)) {
+            System.out.println("Найдено значение NAN");
+            return Double.NaN;
+        }
         return result;
     }
 
-    private double add(int a, int b) {
-        return a + b;
+    private double pow(int firstNumber, int secondNumber) {
+        double result = Math.pow(firstNumber, secondNumber);
+        if (Double.isNaN(result)) {
+            System.out.println("Найдено значение NAN");
+            return Double.NaN;
+        }
+        return result;
     }
 
-    private double subtract(int a, int b) {
-        return a - b;
+    private double mod(int firstNumber, int secondNumber) {
+        return Math.floorMod(firstNumber, secondNumber);
     }
 
-    private double multiply(int a, int b) {
-        return a * b;
+    public void printResultCalc(double result, int firstNumber, int secondNumber, char sign) {
+        if (!Double.isNaN(result)) {
+            DecimalFormat df = new DecimalFormat("#.###");
+            System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));
+        }
     }
-
-    private double div(int a, int b) {
-        return a / b;
-    }
-
-    private double pow(int a, int b) {
-        return Math.pow(a, b);
-    }
-
-    private double mod(int a, int b) {
-        return Math.floorMod(a, b);
-    }
-
-    public void printResultCalc(double result,int firstNumber, char sign, int secondNumber) {
-
-    }
-
 }

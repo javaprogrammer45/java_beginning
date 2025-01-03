@@ -15,35 +15,35 @@ public class UniqueNumbersFiller {
 
     private int[] fillArray(int start, int end) {
         if (start > end) {
-            System.out.println("Ошибка: левая граница " + start + " > " + " правой " + end);
+            System.out.println("Ошибка: левая граница " + start + " > " + "правой " + end);
             return null;
         }
         if ((end - start) == 0) {
-            System.out.println("Ошибка: длина массива должна быть больше 0 (" + (0) + ")");
+            System.out.println("Ошибка: длина массива должна быть больше 0");
             return null;
         }
         int len = (int) ((end - start) * 0.75);
-        int[] uniqueValues = new int[len];
+        int[] uniqueNumbers = new int[len];
 
         Random random = new Random();
-        boolean isExist = true;
-        int uniqueValue;
-        for (int i = 0; i < uniqueValues.length; i++) {
+        boolean isUnique = true;
+        int uniqueNumber;
+        for (int i = 0; i < uniqueNumbers.length; i++) {
             do {
-                uniqueValue = random.nextInt(start, end);
-                for (int value : uniqueValues) {
-                    if (value == uniqueValue) {
-                        isExist = false;
-                        break;
+                uniqueNumber = random.nextInt(start, end);
+                for (int value : uniqueNumbers) {
+                    if (value != uniqueNumber) {
+                        isUnique = true;
                     } else {
-                        isExist = true;
+                        isUnique = false;
+                        break;
                     }
                 }
-            } while (!isExist);
-            uniqueValues[i] = uniqueValue;
+            } while (!isUnique);
+            uniqueNumbers[i] = uniqueNumber;
         }
-        Arrays.sort(uniqueValues);
-        return uniqueValues;
+        Arrays.sort(uniqueNumbers);
+        return uniqueNumbers;
     }
 
     private void printArray(int[] array, int lineLen) {
@@ -57,13 +57,12 @@ public class UniqueNumbersFiller {
         }
         if (array.length != 0) {
             if (array.length < lineLen) {
-                System.out.print("[");
                 for (int i = 0; i < lineLen; i++) {
                     if (i < array.length) {
                         System.out.print(array[i] + ", ");
                     } else {
                         if (i == lineLen - 1) {
-                            System.out.print(0 + "]");
+                            System.out.print(0);
                         } else {
                             System.out.print(0 + ", ");
                         }
@@ -71,25 +70,22 @@ public class UniqueNumbersFiller {
                 }
                 System.out.print("   Количество чисел в строке = " + lineLen + "\n\n");
             } else if (array.length > lineLen) {
-                System.out.print("[");
+
                 int counter = 0;
                 for (int j = 0; j < array.length / lineLen; j++) {
                     for (int k = 0; k <= lineLen - 1; k++) {
                         if (k < lineLen - 1) {
                             System.out.print(array[k + counter] + ", ");
                         } else {
-                            if (k < (array.length - 1) - (lineLen - 1)) {
-                                System.out.print(array[k + counter] + "]");
+                            if (k != (array.length - 1) - (lineLen - 1)) {
+                                System.out.print(array[k + counter] + "\n");
                                 counter += 10;
-                            } else {
-                                System.out.print(array[k + counter] + "]");
                             }
                         }
                     }
-                    System.out.print("   Количество чисел в строке = " + lineLen + "\n\n[");
                 }
+                System.out.print("   Количество чисел в строке = " + lineLen + "\n\n");
             }
         }
     }
 }
-

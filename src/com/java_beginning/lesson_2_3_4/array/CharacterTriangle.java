@@ -1,5 +1,7 @@
 package com.java_beginning.lesson_2_3_4.array;
 
+import java.util.Arrays;
+
 public class CharacterTriangle {
     public static void main(String[] args) {
         CharacterTriangle triangle = new CharacterTriangle();
@@ -7,28 +9,19 @@ public class CharacterTriangle {
         triangle.printTriangle(triangle.formTriangle('0', '9', true));
         triangle.printTriangle(triangle.formTriangle('A', 'J', true));
         triangle.printTriangle(triangle.formTriangle('/', '!', true));
+
     }
 
-    private StringBuilder formTriangle(char start, char end, boolean isIncrease) {
+    private String[] formTriangle(char start, char end, boolean isAsc) {
         StringBuilder triangle = new StringBuilder();
-        isIncrease = start < end;
-        if (isIncrease) {
-            char[] spaces = new char[(end - start) + 2];
-            for (int i = 0; i <= spaces.length - 1; i++) {
-                spaces[i] = ' ';
-            }
-            StringBuilder temp = new StringBuilder();
-            int size = end - start;
-            for (int i = 1; i < size + 2; i++) {
-                for (int j = 0; j <= size + 1 - i; j++) {
-                    triangle.append(spaces[j]);
+        String[] elementsTriangle = new String[(end - start) + 1];
+        if (isAsc) {
+            for (int i = 0; i <= elementsTriangle.length - 1; i++) {
+                elementsTriangle[i] = triangle.repeat(end, i + 1).toString();
+                if (i >= 1) {
+                    elementsTriangle[i] = triangle.repeat(end, i).toString();
                 }
-                triangle.append(temp.repeat(end, i));
-                if (i >= 2) {
-                    temp.repeat(end, i);
-                    triangle.append(temp.delete(0, i + 1));
-                }
-                temp.delete(0, temp.length());
+                triangle.delete(0, triangle.length()).toString();
                 end--;
             }
         } else {
@@ -38,25 +31,13 @@ public class CharacterTriangle {
                 System.out.println("\n\nВведите корректные данные...");
             }
         }
-        return triangle;
+        return elementsTriangle;
     }
 
-    public void printTriangle(StringBuilder triangle) {
-        for (int i = 1; i <= triangle.length(); i++) {
-            if (triangle.charAt(i) == ' ') {
-                System.out.print(triangle.charAt(i));
-            } else if (triangle.charAt(i) != ' ') {
-                do {
-                    System.out.print(triangle.charAt(i));
-                    i++;
-                    if (i == triangle.length()) {
-                        break;
-                    }
-                } while (triangle.charAt(i) != ' ');
-                System.out.println();
-            }
+    public void printTriangle(String[] elementsTriangle) {
+        for (int i = 0; i < elementsTriangle.length; i++) {
+            System.out.print(" ".repeat(elementsTriangle.length - i));
+            System.out.print(elementsTriangle[i] + "\n");
         }
     }
 }
-
-

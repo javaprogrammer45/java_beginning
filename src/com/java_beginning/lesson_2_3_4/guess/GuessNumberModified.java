@@ -1,16 +1,16 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumberModified {
-
     private PlayerModified player1;
     private PlayerModified player2;
 
     public GuessNumberModified(PlayerModified player1, PlayerModified player2) {
-        this.player1 = new PlayerModified("Andrey");
-        this.player2 = new PlayerModified("Aleksey");
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public void start() {
@@ -20,38 +20,51 @@ public class GuessNumberModified {
         Scanner input = new Scanner(System.in);
         do {
             int targetNum = (int) (Math.random() * 100) + 1;
-            System.out.println("Попытка " + attemptsPlayer1 + "\nЧисло вводит " + player1.getName() + ": ");
 
-            choiceNumber(player1, input.nextInt());
+            do {
+                System.out.println("Попытка " + attemptsPlayer1 + "\nЧисло вводит " +
+                        player1.getName() + ": ");
+                if (choiceNumber(player1, input.nextLine())) {
+                    break;
+                }
+            } while (!choiceNumber(player1, input.nextLine()));
 
             if (isGuessed(player1, targetNum)) {
-                System.out.println(player1.getName() + " угадал число " + targetNum + " c " + attemptsPlayer1 + "-й попытки");
+                System.out.println(player1.getName() + " угадал число " + targetNum +
+                        " c " + attemptsPlayer1 + "-й попытки");
                 break;
             }
             attemptsPlayer1++;
             System.out.println("Не угадал, " + player1.getNumber() + " не равно " + targetNum +
-                    ", переход хода к другому игроку...\n" + "Попытка " + attemptsPlayer2 + "\nЧисло вводит " + player2.getName() +
-                    ": ");
+                    ", переход хода к другому игроку...\n");
 
-            choiceNumber(player2, input.nextInt());
+            do {
+                System.out.println("Попытка " + attemptsPlayer2 + "\nЧисло вводит " + player2.getName() + ": ");
+                if (choiceNumber(player2, input.nextLine())) {
+                    break;
+                }
+            } while (!choiceNumber(player2, input.nextLine()));
+
             if (isGuessed(player2, targetNum)) {
                 System.out.println(player2.getName() + " угадал число " + targetNum + " c " + attemptsPlayer2 + "-й попытки");
                 break;
             }
-attemptsPlayer2++;
+            attemptsPlayer2++;
             System.out.println("Не угадал, " + player2.getNumber() + " не равно " + targetNum +
                     ", переход хода к другому игроку...");
 
         } while (true);
-        int[] numbersPlayer1 = Arrays.copyOf(player1.getNumbers(), player1.getIndex());
-        int[] numbersPlayer2 = Arrays.copyOf(player2.getNumbers(), player2.getIndex());
-      for (int i = 0; i < numbersPlayer1.length; i++) {
-          System.out.print(numbersPlayer1[i] + " ");
-      }
-        for (int number : numbersPlayer2) {
-            System.out.println(numbersPlayer2[number]++);
-
+        int[] numbersPlayer1 = Arrays.copyOf(player1.getNumbers(), attemptsPlayer1);
+        int[] numbersPlayer2 = Arrays.copyOf(player2.getNumbers(), attemptsPlayer2);
+        System.out.println();
+        for (int i = 0; i < numbersPlayer1.length - 1; i++) {
+            System.out.print(numbersPlayer1[i] + " ");
         }
+        System.out.println();
+        for (int i = 0; i < numbersPlayer2.length; i++) {
+            System.out.print(numbersPlayer2[i] + " ");
+        }
+        System.out.println();
     }
 
     private boolean isGuessed(PlayerModified player, int targetNum) {
@@ -61,8 +74,19 @@ attemptsPlayer2++;
         return player.getNumber() == targetNum;
     }
 
-    private void choiceNumber(PlayerModified player, int number) {
-        player.setNumber(number);
-        player.setNumbers(player.getNumbers());
+    private boolean choiceNumber(PlayerModified player, String number) {
+        try {
+            player.setNumber(Integer.parseInt(number));
+            player.setNumbers(player.getNumbers());
+            return true;
+        } catch (NumberFormatException e) {
+            e.getMessage();
+            System.out.println("Это не число...Введите число!!!");
+            return false;
+        } catch (IOException e) {
+            e.getMessage();
+            System.out.println("Введите корректные данные...Число должно входить в отрезок [1, 10]. Попробуйте еще раз: ");
+            return false;
+        }
     }
 }

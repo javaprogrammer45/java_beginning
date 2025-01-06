@@ -8,19 +8,27 @@ public class PlayerModified {
     private int number;
     private int[] numbers = new int[10];
     private int index = 0;
+    private final static int START = 1;
+    private final static int END = 100;
 
     public PlayerModified(String name) {
         this.name = name;
     }
 
-    public void setNumber(int number){
+    public int getIndex() {
+        return index;
+    }
+
+    public void setNumber(int number) {
         try {
-            if (number >= 1 && number <= 100) {
+            if (number >= START && number <= END) {
                 this.number = number;
-            }else {throw new Exception();}
+            } else {
+                throw new Exception();
+            }
         } catch (Exception e) {
             System.out.println("Число должно входить в отрезок [1, 100].\n" +
-                    "Попробуйте еще раз:" +e.getMessage());
+                    "Попробуйте еще раз:" + e.getMessage());
         }
     }
 
@@ -37,8 +45,15 @@ public class PlayerModified {
     }
 
     public void setNumbers(int[] numbers) {
-        this.numbers=numbers;
-        Arrays.fill(numbers, index, index + 1, number);
+        Arrays.fill(numbers, index, index, number);
         index++;
+        this.numbers = numbers;
     }
 }
+
+
+
+
+
+
+

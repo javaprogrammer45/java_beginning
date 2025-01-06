@@ -1,5 +1,6 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumberModified {
@@ -23,8 +24,6 @@ public class GuessNumberModified {
 
             choiceNumber(player1, input.nextInt());
 
-
-
             if (isGuessed(player1, targetNum)) {
                 System.out.println(player1.getName() + " угадал число " + targetNum + " c " + attemptsPlayer1 + "-й попытки");
                 break;
@@ -35,9 +34,6 @@ public class GuessNumberModified {
                     ": ");
 
             choiceNumber(player2, input.nextInt());
-
-
-
             if (isGuessed(player2, targetNum)) {
                 System.out.println(player2.getName() + " угадал число " + targetNum + " c " + attemptsPlayer2 + "-й попытки");
                 break;
@@ -47,6 +43,15 @@ attemptsPlayer2++;
                     ", переход хода к другому игроку...");
 
         } while (true);
+        int[] numbersPlayer1 = Arrays.copyOf(player1.getNumbers(), player1.getIndex());
+        int[] numbersPlayer2 = Arrays.copyOf(player2.getNumbers(), player2.getIndex());
+      for (int i = 0; i < numbersPlayer1.length; i++) {
+          System.out.print(numbersPlayer1[i] + " ");
+      }
+        for (int number : numbersPlayer2) {
+            System.out.println(numbersPlayer2[number]++);
+
+        }
     }
 
     private boolean isGuessed(PlayerModified player, int targetNum) {
@@ -60,6 +65,4 @@ attemptsPlayer2++;
         player.setNumber(number);
         player.setNumbers(player.getNumbers());
     }
-
-
 }

@@ -1,34 +1,30 @@
 package com.java_beginning.lesson_2_3_4.array;
 
-import java.util.Arrays;
-
 public class CharacterTriangle {
     public static void main(String[] args) {
         CharacterTriangle triangle = new CharacterTriangle();
 
-        triangle.printTriangle(triangle.formTriangle('0', '9', true));
-        triangle.printTriangle(triangle.formTriangle('A', 'J', true));
-        triangle.printTriangle(triangle.formTriangle('/', '!', true));
-
+        triangle.printTriangle(triangle.formTriangle('0', '9', false));
+        triangle.printTriangle(triangle.formTriangle('A', 'J', false));
+        triangle.printTriangle(triangle.formTriangle('/', '!', false));
     }
 
     private String[] formTriangle(char start, char end, boolean isAsc) {
         StringBuilder triangle = new StringBuilder();
-        String[] elementsTriangle = new String[(end - start) + 1];
-        if (isAsc) {
-            for (int i = 0; i <= elementsTriangle.length - 1; i++) {
-                elementsTriangle[i] = triangle.repeat(end, i + 1).toString();
-                if (i >= 1) {
-                    elementsTriangle[i] = triangle.repeat(end, i).toString();
+        String[] elementsTriangle = new String[0];
+        if (start > end) {
+            System.out.println("Ошибка: левая граница (" + start + ") > правой (" + end + ")");
+        } else if (end - start > 0) {
+            if (!isAsc) {
+                elementsTriangle = new String[(end - start) + 1];
+                for (int i = 0; i <= elementsTriangle.length - 1; i++) {
+                    elementsTriangle[i] = triangle.repeat(end, i + 1).toString();
+                    if (i >= 1) {
+                        elementsTriangle[i] = triangle.repeat(end, i).toString();
+                    }
+                    triangle.delete(0, triangle.length());
+                    end--;
                 }
-                triangle.delete(0, triangle.length()).toString();
-                end--;
-            }
-        } else {
-            if (start > end) {
-                System.out.println("Ошибка: левая граница (" + start + ") > правой (" + end + ")");
-            } else {
-                System.out.println("\n\nВведите корректные данные...");
             }
         }
         return elementsTriangle;

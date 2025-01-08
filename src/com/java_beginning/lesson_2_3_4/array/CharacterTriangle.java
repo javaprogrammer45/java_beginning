@@ -9,31 +9,45 @@ public class CharacterTriangle {
         triangle.printTriangle(triangle.formTriangle('/', '!', false));
     }
 
-    private String[] formTriangle(char start, char end, boolean isAsc) {
-        StringBuilder triangle = new StringBuilder();
-        String[] elementsTriangle = new String[0];
+    private StringBuilder formTriangle(char start, char end, boolean isAsc) {
         if (start > end) {
             System.out.println("Ошибка: левая граница (" + start + ") > правой (" + end + ")");
-        } else if (end - start > 0) {
+            return null;
+        }
+        if (end - start == 0) {
+            System.out.println("Ошибка: длина массива не должна равняться 0");
+            return null;
+        }
+        char[] elementsTriangle = new char[(end - start) + 1];
+
+        for (int i = 0; i < elementsTriangle.length; i++) {
             if (!isAsc) {
-                elementsTriangle = new String[(end - start) + 1];
-                for (int i = 0; i <= elementsTriangle.length - 1; i++) {
-                    elementsTriangle[i] = triangle.repeat(end, i + 1).toString();
-                    if (i >= 1) {
-                        elementsTriangle[i] = triangle.repeat(end, i).toString();
-                    }
-                    triangle.delete(0, triangle.length());
-                    end--;
-                }
+                elementsTriangle[i] = end--;
+            } else {
+                elementsTriangle[i] = start++;
             }
         }
-        return elementsTriangle;
+        StringBuilder triangle = new StringBuilder();
+        for (int i = 0; i <= elementsTriangle.length - 1; i++) {
+            triangle.repeat(elementsTriangle[i], i + 1);
+            if (i >= 1) {
+                triangle.repeat(elementsTriangle[i], i);
+            }
+            triangle.deleteCharAt(triangle.length() - 1);
+            triangle.append(elementsTriangle[i]);
+            triangle.append(" ");
+        }
+        return triangle;
     }
 
-    public void printTriangle(String[] elementsTriangle) {
-        for (int i = 0; i < elementsTriangle.length; i++) {
-            System.out.print(" ".repeat(elementsTriangle.length - i));
-            System.out.print(elementsTriangle[i] + "\n");
+    public void printTriangle(StringBuilder triangle) {
+        if (triangle == null) {
+            return;
+        }
+        String[] strings = triangle.toString().split(" ");
+        for (int i = 0; i < strings.length; i++) {
+            System.out.print(" ".repeat(strings.length -i-1));
+            System.out.print(strings[i] +"\n");
         }
     }
 }

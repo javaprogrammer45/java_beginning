@@ -2,13 +2,13 @@ package com.java_beginning.lesson_2_3_4.calculator;
 
 import java.text.DecimalFormat;
 
-public class ModifiedCalculate {
-    public void calculate(String enterCalcExp) {
+public class Calculate {
+    public void calculate(String mathExpr) {
         int firstNumber = 0;
         int secondNumber = 0;
         char sign = 0;
 
-        String[] elementsExp = enterCalcExp.split("");
+        String[] elementsExp = mathExpr.split("");
         for (int i = 0; i < elementsExp.length; i++) {
             boolean isInteger = elementsExp[i].matches("-?\\d+");
             boolean isChar = elementsExp[i].matches("[-+*/^%]");
@@ -21,7 +21,7 @@ public class ModifiedCalculate {
             if (i == 1 && isChar) {
                 sign = elementsExp[1].charAt(0);
             } else if (i == 1) {
-                System.out.println("Ошибка!!! Введите знак из предложенных...");
+                System.out.println("Ошибка!!! Введите корректный знак математической операции...");
                 return;
             }
             if (i == 2 && isInteger) {

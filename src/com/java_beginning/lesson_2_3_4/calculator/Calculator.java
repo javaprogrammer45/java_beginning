@@ -3,34 +3,49 @@ package com.java_beginning.lesson_2_3_4.calculator;
 import java.text.DecimalFormat;
 
 public class Calculator {
+    private int firstNumber;
+    private int secondNumber;
+    private char sign;
+
+
+    public int getFirstNumber() {
+        return firstNumber;
+    }
+
+    public int getSecondNumber() {
+        return secondNumber;
+    }
+
+    public char getSign() {
+        return sign;
+    }
+
     public double calculate(String mathExpr) {
-        int firstNumber = 0;
-        int secondNumber = 0;
-        char sign = 0;
-
-        String[] elementsExp = mathExpr.replace(" ", "").split("");
-
+        String[] elementsExp = mathExpr.split(" ");
+        if (elementsExp.length != 3) {
+            System.out.println("Введите корректно выражение, например:  2 ^ 10");
+            return Double.NaN;
+        }
         for (int i = 0; i < elementsExp.length; i++) {
-            boolean isInteger = elementsExp[i].matches("-?\\d+");
-            boolean isChar = elementsExp[i].matches("[-+*/^%]");
-
-            if (i == 0 && isInteger) {
+            if (i == 0 && elementsExp[i].matches("-?\\d+")) {
                 firstNumber = Integer.parseInt(elementsExp[i]);
             } else if (i == 0) {
                 System.out.println("Ошибка!!! Введите первое число...");
+                return Double.NaN;
             }
-            if (i == 1 && isChar) {
+            if (i == 1 && elementsExp[i].matches("[-+*/^%]")) {
                 sign = elementsExp[1].charAt(0);
             } else if (i == 1) {
                 System.out.println("Ошибка!!! Введите корректный знак математической операции...");
+                return Double.NaN;
             }
-            if (i == 2 && isInteger) {
+            if (i == 2 && elementsExp[i].matches("-?\\d+")) {
                 secondNumber = Integer.parseInt(elementsExp[i]);
             } else if (i == 2) {
                 System.out.println("Ошибка!!! Введите второе число...");
+                return Double.NaN;
             }
         }
-
         double result = 0;
         switch (sign) {
             case '+':
@@ -52,7 +67,6 @@ public class Calculator {
                 result = mod(firstNumber, secondNumber);
                 break;
         }
-        printResultCalc(result, firstNumber, secondNumber, sign);
         return result;
     }
 
@@ -73,8 +87,12 @@ public class Calculator {
         if (Double.isNaN(result)) {
             System.out.println("Найдено значение NAN");
             return Double.NaN;
+        } else if (secondNumber == 0) {
+            System.out.println("Ошибка. Делить на ноль нельзя!!!");
+            return Double.NaN;
+        } else {
+            return result;
         }
-        return result;
     }
 
     private double pow(int firstNumber, int secondNumber) {
@@ -82,8 +100,12 @@ public class Calculator {
         if (Double.isNaN(result)) {
             System.out.println("Найдено значение NAN");
             return Double.NaN;
+        } else if (secondNumber < 0) {
+            System.out.println("Отрицательная степень!!!");
+            return Double.NaN;
+        } else {
+            return result;
         }
-        return result;
     }
 
     private double mod(int firstNumber, int secondNumber) {

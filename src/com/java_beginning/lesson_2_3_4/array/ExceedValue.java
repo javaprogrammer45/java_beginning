@@ -43,7 +43,7 @@ public class ExceedValue {
         return sourceArray;
     }
 
-    private void print(float[] sourceArray, float[] changedArray, String changedArr) {
+    private void print(float[] sourceArray, float[] changedArray, String changeArray) {
         if (changedArray == null) {
             System.out.println("Массив null\n");
             return;
@@ -52,7 +52,7 @@ public class ExceedValue {
             float[] arrayPrint = Arrays.copyOf(sourceArray, sourceArray.length);
             if (i == 1) {
                 arrayPrint = Arrays.copyOf(changedArray, changedArray.length);
-                System.out.println(changedArr);
+                System.out.println(changeArray);
             }
             int zeroElements = 0;
             for (int j = 0; j < arrayPrint.length; j++) {

@@ -19,14 +19,14 @@ public class CharacterTriangle {
             return null;
         }
         char[] sortedChars = new char[(end - start) + 1];
-
-        for (int i = 0; i < sortedChars.length; i++) {
+        int len = sortedChars.length;
+        for (int i = 0; i < len; i++) {
             sortedChars[i] = (!isAsc) ? end-- : start++;
         }
 
         StringBuilder triangle = new StringBuilder();
-        for (int i = 0; i < sortedChars.length; i++) {
-            triangle.append(" ".repeat(sortedChars.length - i));
+        for (int i = 0; i < len; i++) {
+            triangle.append(" ".repeat(len - i));
             triangle.repeat(sortedChars[i], i);
             if (i >= 1) {
                 triangle.repeat(sortedChars[i], i);
@@ -36,15 +36,14 @@ public class CharacterTriangle {
         return triangle;
     }
 
-    public void printTriangle(StringBuilder triangle) {
+    private void printTriangle(StringBuilder triangle) {
         if (triangle == null) {
             return;
         }
         for (int i = 0; i < triangle.length(); i++) {
             if (triangle.charAt(i) == ' ') {
                 System.out.print(triangle.charAt(i));
-            }
-            if (triangle.charAt(i) != ' ') {
+            } else {
                 System.out.print(triangle.charAt(i));
                 if (i != triangle.length() - 1) {
                     if (triangle.charAt(i) != triangle.charAt(i + 1)) {

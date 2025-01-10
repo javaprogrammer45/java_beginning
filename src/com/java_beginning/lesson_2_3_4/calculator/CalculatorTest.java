@@ -7,22 +7,22 @@ public class CalculatorTest {
         Calculator calc = new Calculator();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";
+
         do {
             if (answer.equals("yes")) {
                 System.out.println("Введите выражение из  аргументов, например:  2 ^ 10");
                 String mathExpr = sc.nextLine();
-                calc.calculate(mathExpr);
-                System.out.println("Хотите продолжить вычисления?");
+                calc.printResultCalc(calc.calculate(mathExpr), calc.getFirstNumber(), calc.getSecondNumber(), calc.getSign());
+                System.out.println("Хотите продолжить вычисления? [yes / no] ");
                 answer = sc.nextLine().toLowerCase();
             }
-
-            if (answer.equals("no")) {
-                return;
-            } else {
+            if (!answer.equals("yes") && !answer.equals("no")) {
                 System.out.print("Введите корректный ответ [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
+            } else {
+                break;
             }
-        } while (answer.equals("yes") || !answer.equals("no"));
+        } while (answer.equals("yes") || (!answer.equals("yes") && !answer.equals("no")));
     }
 }
 

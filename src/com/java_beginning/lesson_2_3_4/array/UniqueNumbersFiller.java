@@ -35,6 +35,7 @@ public class UniqueNumbersFiller {
                 for (int j = 0; j < i; j++) {
                     if (uniqueNumbers[j] == randomNumber) {
                         isUnique = false;
+                        break;
                     }
                 }
             } while (!isUnique);

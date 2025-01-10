@@ -100,9 +100,6 @@ public class Calculator {
         if (Double.isNaN(result)) {
             System.out.println("Найдено значение NAN");
             return Double.NaN;
-        } else if (secondNumber < 0) {
-            System.out.println("Отрицательная степень!!!");
-            return Double.NaN;
         } else {
             return result;
         }
@@ -110,12 +107,5 @@ public class Calculator {
 
     private double mod(int firstNumber, int secondNumber) {
         return Math.floorMod(firstNumber, secondNumber);
-    }
-
-    public void printResultCalc(double result, int firstNumber, int secondNumber, char sign) {
-        if (!Double.isNaN(result)) {
-            DecimalFormat df = new DecimalFormat("#.###");
-            System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));
-        }
     }
 }

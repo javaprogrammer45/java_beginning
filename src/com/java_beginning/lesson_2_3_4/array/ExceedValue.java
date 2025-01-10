@@ -25,12 +25,12 @@ public class ExceedValue {
 
     private float[] changeArray(float[] sourceArray, int index) {
         if (index < 0) {
-            System.out.println("Отрицательный индекс\n\n");
-            return sourceArray;
+            System.out.println("Отрицательный индекс. Индекс = " + index + "\n\n");
+            return null;
         }
         if (index >= sourceArray.length) {
-            System.out.println("Индекс должен быть меньше (15) и больше или равно (0)\n\n");
-            return sourceArray;
+            System.out.println("Индекс должен быть меньше (15) и больше или равно (0). Индекс = " + index + "\n\n");
+            return null;
         }
         for (int i = 0; i < sourceArray.length; i++) {
             if (sourceArray[i] > sourceArray[index]) {

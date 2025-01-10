@@ -2,33 +2,32 @@ package com.java_beginning.lesson_2_3_4.calculator;
 
 import java.text.DecimalFormat;
 
-public class Calculate {
-    public void calculate(String mathExpr) {
+public class Calculator {
+    public double calculate(String mathExpr) {
         int firstNumber = 0;
         int secondNumber = 0;
         char sign = 0;
 
-        String[] elementsExp = mathExpr.split("");
+        String[] elementsExp = mathExpr.replace(" ", "").split("");
+
         for (int i = 0; i < elementsExp.length; i++) {
             boolean isInteger = elementsExp[i].matches("-?\\d+");
             boolean isChar = elementsExp[i].matches("[-+*/^%]");
+
             if (i == 0 && isInteger) {
                 firstNumber = Integer.parseInt(elementsExp[i]);
             } else if (i == 0) {
                 System.out.println("Ошибка!!! Введите первое число...");
-                return;
             }
             if (i == 1 && isChar) {
                 sign = elementsExp[1].charAt(0);
             } else if (i == 1) {
                 System.out.println("Ошибка!!! Введите корректный знак математической операции...");
-                return;
             }
             if (i == 2 && isInteger) {
                 secondNumber = Integer.parseInt(elementsExp[i]);
             } else if (i == 2) {
                 System.out.println("Ошибка!!! Введите второе число...");
-                return;
             }
         }
 
@@ -54,7 +53,7 @@ public class Calculate {
                 break;
         }
         printResultCalc(result, firstNumber, secondNumber, sign);
-
+        return result;
     }
 
     private double add(int firstNumber, int secondNumber) {

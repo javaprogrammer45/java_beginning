@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CalculatorTest {
     public static void main(String[] args) {
-        Calculate calc = new Calculate();
+        Calculator calc = new Calculator();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";
         do {
@@ -16,17 +16,12 @@ public class CalculatorTest {
                 answer = sc.nextLine().toLowerCase();
             }
 
-            if (!answer.equals("yes") && !answer.equals("no")) {
+            if (answer.equals("no")) {
+                return;
+            } else {
                 System.out.print("Введите корректный ответ [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
-                if (!answer.equals("yes") && !answer.equals("no")) {
-                    continue;
-                }
             }
-            if (answer.equals("yes")) {
-                continue;
-            }
-            return;
         } while (answer.equals("yes") || !answer.equals("no"));
     }
 }

@@ -26,23 +26,20 @@ public class UniqueNumbersFiller {
         int len = (int) ((end - start) * 0.75);
         int[] uniqueNumbers = new int[len];
         Random random = new Random();
-        int randomNumber;
         for (int i = 0; i < uniqueNumbers.length; i++) {
-            boolean isUnique = true;
+            int randomNumber;
+            boolean isUnique;
             do {
                 randomNumber = random.nextInt(start, end + 1);
+                isUnique = true;
                 for (int j = 0; j < i; j++) {
-                    if (uniqueNumbers[j] != randomNumber) {
-                        isUnique = true;
-                    } else {
+                    if (uniqueNumbers[j] == randomNumber) {
                         isUnique = false;
-                        break;
                     }
                 }
             } while (!isUnique);
             uniqueNumbers[i] = randomNumber;
         }
-
         Arrays.sort(uniqueNumbers);
         return uniqueNumbers;
     }
@@ -52,22 +49,21 @@ public class UniqueNumbersFiller {
             System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" + lineLen + ")\n");
             return;
         }
-        if (array != null) {
-            for (int i = 0; i < array.length - 1; i++) {
-                if (i % lineLen == 0 && i != 0) {
-                    System.out.println();
-                }
-                System.out.print(array[i] + ", ");
-            }
-            System.out.print(array[array.length - 1]);
-            if (array.length < lineLen) {
-                System.out.print(", 0".repeat(lineLen - array.length - 1));
-                System.out.print(", 0");
-
-            }
-            System.out.println("\nКоличество чисел в строке = " + lineLen + "\n");
-        } else {
+        if (array == null) {
             System.out.println("Ошибка: массив не должен быть null\n");
+            return;
         }
+        for (int i = 0; i < array.length - 1; i++) {
+            if (i % lineLen == 0 && i != 0) {
+                System.out.println();
+            }
+            System.out.print(array[i] + ", ");
+        }
+        System.out.print(array[array.length - 1]);
+        if (array.length < lineLen) {
+            System.out.print(", 0".repeat(lineLen - array.length - 1));
+            System.out.print(", 0");
+        }
+        System.out.println("\nКоличество чисел в строке = " + lineLen + "\n");
     }
 }

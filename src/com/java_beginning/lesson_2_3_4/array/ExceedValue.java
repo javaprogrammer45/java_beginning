@@ -1,16 +1,18 @@
 package com.java_beginning.lesson_2_3_4.array;
 
+import java.util.Arrays;
+
 public class ExceedValue {
     public static void main(String[] args) {
         ExceedValue exceedValue = new ExceedValue();
-        exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changArray(exceedValue.fillSourceArray(), -1),
-                "Изменённый массив");
-        exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changArray(exceedValue.fillSourceArray(), 15),
-                "Изменённый массив");
-        exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changArray(exceedValue.fillSourceArray(), -0),
-                "Изменённый массив");
-        exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changArray(exceedValue.fillSourceArray(), 14),
-                "Изменённый массив");
+        exceedValue.print(exceedValue.fillSourceArray(),
+                exceedValue.changeArray(exceedValue.fillSourceArray(), -1), "Изменённый массив");
+        exceedValue.print(exceedValue.fillSourceArray(),
+                exceedValue.changeArray(exceedValue.fillSourceArray(), 15), "Изменённый массив");
+        exceedValue.print(exceedValue.fillSourceArray(),
+                exceedValue.changeArray(exceedValue.fillSourceArray(), -0), "Изменённый массив");
+        exceedValue.print(exceedValue.fillSourceArray(),
+                exceedValue.changeArray(exceedValue.fillSourceArray(), 14), "Изменённый массив");
     }
 
     private float[] fillSourceArray() {
@@ -21,52 +23,54 @@ public class ExceedValue {
         return array;
     }
 
-    private float[] changArray(float[] sourceArray, int index) {
-        if (index >= 0 && index < sourceArray.length) {
-            for (int i = 0; i < sourceArray.length; i++) {
-                if (sourceArray[i] > sourceArray[index]) {
-                    sourceArray[i] = 0;
-                }
-                if (i == sourceArray.length - 1) {
-                    System.out.printf("%s%.3f%s", "значение из ячейки по переданному индексу  ", sourceArray[index], "\n");
-                }
-            }
-        } else if (index < 0) {
+    private float[] changeArray(float[] sourceArray, int index) {
+        if (index < 0) {
             System.out.println("Отрицательный индекс\n\n");
-        } else {
+            return sourceArray;
+        }
+        if (index >= sourceArray.length) {
             System.out.println("Индекс должен быть меньше (15) и больше или равно (0)\n\n");
+            return sourceArray;
+        }
+        for (int i = 0; i < sourceArray.length; i++) {
+            if (sourceArray[i] > sourceArray[index]) {
+                sourceArray[i] = 0;
+            }
+            if (i == sourceArray.length - 1) {
+                System.out.printf("%s%.3f%n", "значение из ячейки по переданному индексу  ", sourceArray[index]);
+            }
         }
         return sourceArray;
     }
 
-    private void print(float[] sourceArray, float[] changedArray, String nameChangedArr) {
-
-        for (int i = 0; i < sourceArray.length; i++) {
-            if (i == 7) {
-                System.out.println();
-            }
-            if (i == sourceArray.length - 1) {
-                System.out.printf("%.3f%s", sourceArray[i], "\n\n");
-                break;
-            }
-            System.out.printf("%.3f%s", sourceArray[i], ", ");
+    private void print(float[] sourceArray, float[] changedArray, String changedArr) {
+        if (changedArray == null) {
+            System.out.println("Массив null\n");
+            return;
         }
-
-        System.out.println(nameChangedArr);
-        int zeroElements = 0;
-        for (int i = 0; i < changedArray.length; i++) {
-            if (i == 7) {
-                System.out.println();
+        for (int i = 0; i < 2; i++) {
+            float[] arrayPrint = Arrays.copyOf(sourceArray, sourceArray.length);
+            if (i == 1) {
+                arrayPrint = Arrays.copyOf(changedArray, changedArray.length);
+                System.out.println(changedArr);
             }
-            if (i == sourceArray.length - 1) {
-                System.out.printf("%.3f%s", changedArray[i], "\n");
-                break;
+            int zeroElements = 0;
+            for (int j = 0; j < arrayPrint.length; j++) {
+                if (j == 8) {
+                    System.out.println();
+                }
+                if (j == arrayPrint.length - 1) {
+                    System.out.printf("%.3f%n", arrayPrint[j]);
+                    break;
+                }
+                if (arrayPrint[j] == 0) {
+                    zeroElements++;
+                }
+                System.out.printf("%.3f%s", changedArray[j], ", ");
             }
-            if (changedArray[i] == 0) {
-                zeroElements++;
+            if (i == 1) {
+                System.out.println("Количество обнулённых ячеек =  " + zeroElements + "\n\n");
             }
-            System.out.printf("%.3f%s", changedArray[i], ", ");
         }
-        System.out.println("Количество обнулённых ячеек =  " + zeroElements + "\n\n");
     }
 }

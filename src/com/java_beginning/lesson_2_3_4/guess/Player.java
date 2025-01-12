@@ -8,20 +8,14 @@ public class Player {
     private int number;
     private int[] numbers = new int[10];
     private int index = 0;
+    private final static int START = 1;
+    private final static int END = 100;
 
     public Player(String name) {
         this.name = name;
     }
 
-    private final static int START = 1;
-    private final static int END = 100;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setNumber(int number) throws IOException {
-
         if (number >= START && number <= END) {
             this.number = number;
         } else {
@@ -43,7 +37,7 @@ public class Player {
 
     public void setNumbers(int[] numbers) {
         this.numbers = numbers;
-        Arrays.fill(numbers, index, index+1, number);
+        Arrays.fill(numbers, index, index + 1, number);
         index++;
     }
 }

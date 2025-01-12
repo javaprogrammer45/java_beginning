@@ -1,7 +1,6 @@
 package com.java_beginning.lesson_2_3_4.calculator;
 
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class CalculatorTest {
@@ -16,7 +15,7 @@ public class CalculatorTest {
                 System.out.println("Введите выражение из  аргументов, например:  2 ^ 10");
                 String mathExpr = sc.nextLine();
                 double result = calc.calculate(mathExpr);
-                calcTest.printResultCalc(calc.getFirstNumber(), calc.getSecondNumber(), calc.getSign(), result);
+                calcTest.printCalcResult(calc.getFirstNumber(), calc.getSecondNumber(), calc.getSign(), result);
                 System.out.println("Хотите продолжить вычисления? [yes / no] ");
                 answer = sc.nextLine().toLowerCase();
             }
@@ -24,10 +23,10 @@ public class CalculatorTest {
                 System.out.print("Введите корректный ответ [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
-        } while (answer.equals("yes") || (!answer.equals("yes") && !answer.equals("no")));
+        } while (!answer.equals("no"));
     }
 
-    public void printResultCalc(double firstNumber, double secondNumber, char sign, double result) {
+    public void printCalcResult(int firstNumber, int secondNumber, char sign, double result) {
         if (!Double.isNaN(result)) {
             DecimalFormat df = new DecimalFormat("#.###");
             System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));

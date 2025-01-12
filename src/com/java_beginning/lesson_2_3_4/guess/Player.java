@@ -8,10 +8,15 @@ public class Player {
     private int number;
     private int[] numbers = new int[10];
     private int index = 0;
+
+    public Player(String name) {
+        this.name = name;
+    }
+
     private final static int START = 1;
     private final static int END = 100;
 
-    public Player(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

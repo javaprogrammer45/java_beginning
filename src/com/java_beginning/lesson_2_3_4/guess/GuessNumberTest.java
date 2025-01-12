@@ -4,17 +4,28 @@ import java.util.Scanner;
 
 public class GuessNumberTest {
     public static void main(String[] args) {
-        GuessNumber game = new GuessNumber(new Player("Andrey"), new Player("Aleksey"));
         Scanner input = new Scanner(System.in);
-        String agreement = "";
+
+        System.out.println("Enter name firstGamer...");
+        Player player1 = new Player(input.nextLine());
+
+        System.out.println("Enter name secondGamer...");
+        Player player2 = new Player(input.nextLine());
+
+        GuessNumber game = new GuessNumber(player1, player2);
+        String agreement = "yes";
         do {
-            game.start();
+            if (agreement.equals("yes")) {
+                game.start();
 
-            System.out.println("Do you want to play again? [yes/no]: ");
-            do {
-                agreement = input.nextLine();
+                System.out.println("Do you want to play again? [yes/no]: ");
+                agreement = input.nextLine().toLowerCase();
+            }
 
-            } while (!agreement.equals("yes") && !agreement.equals("no"));
-        } while (agreement.equals("yes"));
+            if (!agreement.equals("yes") && !agreement.equals("no")) {
+                System.out.print("Enter correct answer [yes / no]:");
+                agreement = input.nextLine().toLowerCase();
+            }
+        } while (!agreement.equals("no"));
     }
 }

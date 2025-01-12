@@ -15,47 +15,37 @@ public class GuessNumber {
 
     public void start() {
         System.out.println("Игра началась! У каждого игрока по 10 попыток...");
+        Scanner input = new Scanner(System.in);
         int attemptsPlayer1 = 1;
         int attemptsPlayer2 = 1;
-        Scanner input = new Scanner(System.in);
+        int attemptsPlayer;
+        Player player;
         do {
             int targetNum = (int) (Math.random() * 100) + 1;
-
+            player = player1;
+            boolean isEnd = false;
             do {
-                System.out.println("Попытка " + attemptsPlayer1 + "\nЧисло вводит " +
-                        player1.getName() + ": ");
-                if (choiceNumber(player1, input.nextLine())) {
-                    break;
+                if (player.equals(player1)) {
+                    attemptsPlayer = attemptsPlayer1++;
+                } else {
+                    attemptsPlayer = attemptsPlayer2++;
+                    isEnd = true;
                 }
-            } while (!choiceNumber(player1, input.nextLine()));
-
-            if (isGuessed(player1, targetNum)) {
-                System.out.println(player1.getName() + " угадал число " + targetNum +
-                        " c " + attemptsPlayer1 + "-й попытки");
-                break;
-            }
-            attemptsPlayer1++;
-            System.out.println("Не угадал, " + player1.getNumber() + " не равно " + targetNum +
-                    ", переход хода к другому игроку...\n");
-
-            do {
-                System.out.println("Попытка " + attemptsPlayer2 + "\nЧисло вводит " + player2.getName() + ": ");
-                if (choiceNumber(player2, input.nextLine())) {
-                    break;
+                System.out.println("Попытка " + attemptsPlayer + "\nЧисло вводит " + player.getName() + ": ");
+                enterNumbers(player, input.nextLine());
+                if (isGuessed(player, targetNum)) {
+                    System.out.println(player.getName() + " угадал число " + targetNum +
+                            " c " + attemptsPlayer + "-й попытки");
+                    printEnteredNumbers(player1, attemptsPlayer1);
+                    printEnteredNumbers(player2, attemptsPlayer2);
+                    return;
                 }
-            } while (!choiceNumber(player2, input.nextLine()));
+                System.out.println("Не угадал, " + player.getNumber() + " не равно " + targetNum +
+                        ", переход хода к другому игроку...\n");
 
-            if (isGuessed(player2, targetNum)) {
-                System.out.println(player2.getName() + " угадал число " + targetNum + " c " + attemptsPlayer2 + "-й попытки");
-                break;
-            }
-            attemptsPlayer2++;
-            System.out.println("Не угадал, " + player2.getNumber() + " не равно " + targetNum +
-                    ", переход хода к другому игроку...");
-
+                player = player2;
+            } while (!isEnd);
         } while (true);
-        printEnteredNumbers(player1, attemptsPlayer1);
-        printEnteredNumbers(player2, attemptsPlayer2);
     }
 
     private boolean isGuessed(Player player, int targetNum) {
@@ -87,5 +77,11 @@ public class GuessNumber {
         System.out.println();
     }
 
-
+    private void enterNumbers(Player player, String number) {
+        do {
+            if (choiceNumber(player, number)) {
+                break;
+            }
+        } while (false);
+    }
 }

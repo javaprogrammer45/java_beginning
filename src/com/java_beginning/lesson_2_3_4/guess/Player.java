@@ -20,7 +20,7 @@ public class Player {
         if (number >= START && number <= END) {
             this.number = number;
         } else {
-            throw new IOException();
+            throw new IOException("Введите корректные данные...Число должно входить в отрезок [1, 10]. Попробуйте еще раз: ");
         }
     }
 

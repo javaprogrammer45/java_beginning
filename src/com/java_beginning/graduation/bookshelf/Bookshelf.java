@@ -29,6 +29,8 @@ public class Bookshelf {
             e.getMessage();
             System.out.println("Welcome to the Bookshelf !!!");
         }
+        System.out.println(" Шкаф пуст. Вы можете добавить в него первую книгу...");
+
 
 
 

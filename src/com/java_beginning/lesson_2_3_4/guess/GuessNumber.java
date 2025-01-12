@@ -54,17 +54,8 @@ public class GuessNumber {
                     ", переход хода к другому игроку...");
 
         } while (true);
-        int[] numbersPlayer1 = Arrays.copyOf(player1.getNumbers(), attemptsPlayer1);
-        int[] numbersPlayer2 = Arrays.copyOf(player2.getNumbers(), attemptsPlayer2);
-        System.out.println();
-        for (int i = 0; i < numbersPlayer1.length - 1; i++) {
-            System.out.print(numbersPlayer1[i] + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < numbersPlayer2.length; i++) {
-            System.out.print(numbersPlayer2[i] + " ");
-        }
-        System.out.println();
+        printEnteredNumbers(player1, attemptsPlayer1);
+        printEnteredNumbers(player2, attemptsPlayer2);
     }
 
     private boolean isGuessed(Player player, int targetNum) {
@@ -80,13 +71,19 @@ public class GuessNumber {
             player.setNumbers(player.getNumbers());
             return true;
         } catch (NumberFormatException e) {
-            e.getMessage();
             System.out.println("Это не число...Введите число!!!");
             return false;
         } catch (IOException e) {
-            e.getMessage();
-            System.out.println("Введите корректные данные...Число должно входить в отрезок [1, 10]. Попробуйте еще раз: ");
+            System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    private void printEnteredNumbers(Player player, int attemptsPlayer) {
+        int[] numbersPlayer = Arrays.copyOf(player.getNumbers(), attemptsPlayer);
+        for (int j : numbersPlayer) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
     }
 }

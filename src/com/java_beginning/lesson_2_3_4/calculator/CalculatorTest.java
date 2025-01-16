@@ -16,7 +16,7 @@ public class CalculatorTest {
                 String mathExpr = sc.nextLine();
                 double result = calc.calculate(mathExpr);
                 calcTest.printCalcResult(calc.getFirstNumber(), calc.getSecondNumber(), calc.getSign(), result);
-                System.out.println("Хотите продолжить вычисления? [yes / no] ");
+                System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
             if (!answer.equals("yes") && !answer.equals("no")) {

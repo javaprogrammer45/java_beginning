@@ -18,28 +18,28 @@ public class Calculator {
     }
 
     public double calculate(String mathExpr) {
-        String[] elementsExp = mathExpr.split(" ");
-        if (elementsExp.length != 3) {
+        String[] elementsExpr = mathExpr.split(" ");
+        if (elementsExpr.length != 3) {
             System.out.println("Введите корректно выражение, например:  2 ^ 10");
             return Double.NaN;
         }
 
-        if (elementsExp[0].matches("-?\\d+")) {
-            firstNumber = Integer.parseInt(elementsExp[0]);
+        if (elementsExpr[0].matches("-?\\d+")) {
+            firstNumber = Integer.parseInt(elementsExpr[0]);
         } else {
-            System.out.println("Ошибка!!! Введите первое число...");
+            System.out.println("Ошибка!!! Введите корректно первый аргумент");
             return Double.NaN;
         }
-        if (elementsExp[1].matches("[-+*/^%]")) {
-            sign = elementsExp[1].charAt(0);
+        if (elementsExpr[1].matches("[-+*/^%]")) {
+            sign = elementsExpr[1].charAt(0);
         } else {
-            System.out.println("Ошибка!!! Введите корректный знак математической операции...");
+            System.out.println("Ошибка!!! Введите корректный знак математической операции");
             return Double.NaN;
         }
-        if (elementsExp[2].matches("-?\\d+")) {
-            secondNumber = Integer.parseInt(elementsExp[2]);
+        if (elementsExpr[2].matches("-?\\d+")) {
+            secondNumber = Integer.parseInt(elementsExpr[2]);
         } else {
-            System.out.println("Ошибка!!! Введите второе число...");
+            System.out.println("Ошибка!!! Введите корректно  второй аргумент");
             return Double.NaN;
         }
 
@@ -80,30 +80,20 @@ public class Calculator {
     }
 
     private double div(int firstNumber, int secondNumber) {
-        double result = (double) firstNumber / secondNumber;
-        if (Double.isNaN(result)) {
-            System.out.println("Найдено значение NAN");
-            return Double.NaN;
-        }
         if (secondNumber == 0) {
             System.out.println("Ошибка. Делить на ноль нельзя!!!");
             return Double.NaN;
         }
-        return result;
+        return (double) firstNumber / secondNumber;
     }
 
     private double pow(int firstNumber, int secondNumber) {
-        double result = Math.pow(firstNumber, secondNumber);
-        if (Double.isNaN(result)) {
-            System.out.println("Найдено значение NAN");
-            return Double.NaN;
-        }
-        return result;
+        return Math.pow(firstNumber, secondNumber);
     }
 
     private double mod(int firstNumber, int secondNumber) {
-        if (firstNumber == 0 || secondNumber == 0) {
-            System.out.println("Введите корректные данные!!!");
+        if (secondNumber == 0) {
+            System.out.println("Второй аргумент не должен равняться 0!!!");
             return Double.NaN;
         }
         return Math.floorMod(firstNumber, secondNumber);

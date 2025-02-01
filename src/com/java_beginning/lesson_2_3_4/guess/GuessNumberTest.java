@@ -18,12 +18,12 @@ public class GuessNumberTest {
             if (agreement.equals("yes")) {
                 game.start();
 
-                System.out.println("Do you want to play again? [yes/no]: ");
+                System.out.print("Do you want to play again? [yes/no]: ");
                 agreement = input.nextLine().toLowerCase();
             }
 
             if (!agreement.equals("yes") && !agreement.equals("no")) {
-                System.out.print("Enter correct answer [yes / no]:");
+                System.out.print("Enter correct answer [yes / no]: ");
                 agreement = input.nextLine().toLowerCase();
             }
         } while (!agreement.equals("no"));

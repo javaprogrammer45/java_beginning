@@ -27,7 +27,7 @@ public class Calculator {
         if (elementsExpr[0].matches("-?\\d+")) {
             firstNumber = Integer.parseInt(elementsExpr[0]);
         } else {
-            System.out.println("Ошибка!!! Введите корректно первый аргумент");
+            System.out.println("Ошибка!!! Введите корректно первый аргумент(только целое число)");
             return Double.NaN;
         }
         if (elementsExpr[1].matches("[-+*/^%]")) {
@@ -39,7 +39,7 @@ public class Calculator {
         if (elementsExpr[2].matches("-?\\d+")) {
             secondNumber = Integer.parseInt(elementsExpr[2]);
         } else {
-            System.out.println("Ошибка!!! Введите корректно  второй аргумент");
+            System.out.println("Ошибка!!! Введите корректно  второй аргумент(только целое число)");
             return Double.NaN;
         }
 
@@ -93,7 +93,7 @@ public class Calculator {
 
     private double mod(int firstNumber, int secondNumber) {
         if (secondNumber == 0) {
-            System.out.println("Второй аргумент не должен равняться 0!!!");
+            System.out.println("Ошибка. Делить на ноль нельзя!!!");
             return Double.NaN;
         }
         return Math.floorMod(firstNumber, secondNumber);

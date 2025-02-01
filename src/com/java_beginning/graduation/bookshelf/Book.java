@@ -3,12 +3,17 @@ package com.java_beginning.graduation.bookshelf;
 public class Book {
     private String author;
     private String title;
-    private int yearPublication;
+    private int yearPublished;
+
+    public Book() {
+
+
+    }
 
     public Book(String author, String title, int yearPublication) {
         this.author = author;
         this.title = title;
-        this.yearPublication = yearPublication;
+        this.yearPublished = yearPublication;
     }
 
 
@@ -29,19 +34,15 @@ public class Book {
     }
 
     public int getYearPublication() {
-        return yearPublication;
+        return yearPublished;
     }
 
     public void setYearPublication(int yearPublication) {
-        this.yearPublication = yearPublication;
+        this.yearPublished = yearPublication;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", yearPublication=" + yearPublication +
-                '}';
+        return author + ", " + title + ", " + yearPublished;
     }
 }

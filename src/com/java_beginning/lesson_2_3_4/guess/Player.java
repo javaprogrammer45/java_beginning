@@ -1,30 +1,17 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Player {
-    private String name;
-    private int number;
-    private int[] numbers = new int[10];
-    private int index = 0;
+    private final static int LENGTH_ARRAY = 10;
     private final static int START = 1;
     private final static int END = 100;
+    private String name;
+    private int[] numbers = new int[LENGTH_ARRAY];
+    private int countNumbers = 0;
 
     public Player(String name) {
         this.name = name;
-    }
-
-    public void setNumber(int number) throws IOException {
-        if (number >= START && number <= END) {
-            this.number = number;
-        } else {
-            throw new IOException("Введите корректные данные...Число должно входить в отрезок [1, 10]. Попробуйте еще раз: ");
-        }
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     public String getName() {
@@ -32,13 +19,20 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return numbers;
+        return Arrays.copyOf(numbers, countNumbers);
     }
 
-    public void setNumbers(int[] numbers) {
-        this.numbers = numbers;
-        Arrays.fill(numbers, index, index + 1, number);
-        index++;
+    public void setNumber(int number) {
+        if (number >= START && number <= END) {
+            fillArray(numbers, number);
+        } else {
+            throw new RuntimeException("Введите корректные данные...Число должно входить в отрезок [1, 10]." +
+                    " Попробуйте еще раз: ");
+        }
+    }
+
+    public void fillArray(int[] numbers, int number) {
+        numbers[countNumbers++] = number;
     }
 }
 

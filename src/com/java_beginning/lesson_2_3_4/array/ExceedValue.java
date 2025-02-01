@@ -1,18 +1,16 @@
 package com.java_beginning.lesson_2_3_4.array;
 
-import java.util.Arrays;
-
 public class ExceedValue {
     public static void main(String[] args) {
         ExceedValue exceedValue = new ExceedValue();
         exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changeArray(-1),
-                "Изменённый массив");
+                "Изменённый массив", -1);
         exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changeArray(15),
-                "Изменённый массив");
+                "Изменённый массив", 15);
         exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changeArray(-0),
-                "Изменённый массив");
+                "Изменённый массив", -0);
         exceedValue.print(exceedValue.fillSourceArray(), exceedValue.changeArray(14),
-                "Изменённый массив");
+                "Изменённый массив", 14);
     }
 
     private float[] fillSourceArray() {
@@ -45,7 +43,7 @@ public class ExceedValue {
         return sourceArray;
     }
 
-    private void print(float[] sourceArray, float[] changedArray, String changeArray) {
+    private void print(float[] sourceArray, float[] changedArray, String changeArray, int index) {
         if (changedArray == null) {
             System.out.println("Массив null\n");
             return;
@@ -54,6 +52,10 @@ public class ExceedValue {
         for (int i = 0; i < 2; i++) {
             float[] arrayPrint = sourceArray;
             if (i == 1) {
+                if (index < 0 || index >= 15) {
+                    System.out.println();
+                    break;
+                }
                 arrayPrint = changedArray;
                 System.out.println(changeArray);
             }

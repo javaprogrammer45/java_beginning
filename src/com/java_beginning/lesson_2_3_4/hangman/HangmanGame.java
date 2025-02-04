@@ -11,7 +11,7 @@ public class HangmanGame {
         return words;
     }
 
-    public void start(String[] words) {
+    public void start() {
         SecureRandom random = new SecureRandom();
         String randomWord = words[random.nextInt(words.length)];
         System.out.println(randomWord);

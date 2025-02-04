@@ -1,11 +1,11 @@
 package com.java_beginning.lesson_2_3_4.calculator;
 
 import java.text.DecimalFormat;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CalculatorTest {
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
         CalculatorTest calcTest = new CalculatorTest();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";
@@ -14,8 +14,34 @@ public class CalculatorTest {
             if (answer.equals("yes")) {
                 System.out.println("Введите выражение из  аргументов, например:  2 ^ 10");
                 String mathExpr = sc.nextLine();
-                double result = calc.calculate(mathExpr);
-                calcTest.printCalcResult(calc.getFirstNumber(), calc.getSecondNumber(), calc.getSign(), result);
+
+                String result = "";
+                try {
+                    result = Calculator.calculate(mathExpr);
+                } catch (InvalidMathematicalSignException e) {
+                    System.out.println(e.getMessage());
+                    continue;
+                } catch (InputFirstNumberException r) {
+                    System.out.println(r.getMessage());
+                    continue;
+                } catch (InputSecondNumberException v) {
+                    System.out.println(v.getMessage());
+                    continue;
+                } catch (IncorrectMathematicalSignException m) {
+                    System.out.println(m.getMessage());
+                    continue;
+                } catch (IllegalStateException c) {
+                    System.out.println(c.getMessage());
+                    continue;
+                } catch (ArithmeticException ae) {
+                    System.out.println(ae.getMessage());
+                    continue;
+                } catch (InputMismatchException i) {
+                    System.out.println(i.getMessage());
+                    continue;
+                }
+
+                calcTest.printCalcResult(Calculator.getFirstNumber(), Calculator.getSecondNumber(), Calculator.getSign(), result);
                 System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
@@ -26,11 +52,9 @@ public class CalculatorTest {
         } while (!answer.equals("no"));
     }
 
-    public void printCalcResult(int firstNumber, int secondNumber, char sign, double result) {
-        if (!Double.isNaN(result)) {
-            DecimalFormat df = new DecimalFormat("#.###");
-            System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));
-        }
+    public void printCalcResult(int firstNumber, int secondNumber, char sign, String result) {
+        DecimalFormat df = new DecimalFormat("#.###");
+        System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(Double.parseDouble(result)));
     }
 }
 

@@ -1,100 +1,99 @@
 package com.java_beginning.lesson_2_3_4.calculator;
 
-public class Calculator {
-    private int firstNumber;
-    private int secondNumber;
-    private char sign;
+import java.util.InputMismatchException;
 
-    public int getFirstNumber() {
+public class Calculator {
+    private static int firstNumber;
+    private static int secondNumber;
+    private static char sign;
+    private static final int QUANTITY_ARGUMENTS = 3;
+    private static final int QUANTITY_ELEMENTS = 4;
+
+    public static int getFirstNumber() {
         return firstNumber;
     }
 
-    public int getSecondNumber() {
+    public static int getSecondNumber() {
         return secondNumber;
     }
 
-    public char getSign() {
+    public static char getSign() {
         return sign;
     }
 
-    public double calculate(String mathExpr) {
-        String[] elementsExpr = mathExpr.split(" ");
-        if (elementsExpr.length != 3) {
-            System.out.println("Введите корректно выражение, например:  2 ^ 10");
-            return Double.NaN;
+    public static String calculate(String mathExpr) throws InvalidMathematicalSignException,
+            InputFirstNumberException, InputSecondNumberException, IncorrectMathematicalSignException,
+            IllegalStateException {
+        String[] elementsExpr = mathExpr.trim().replace(" ", "").split("");
+
+        if (elementsExpr.length == QUANTITY_ELEMENTS && (elementsExpr[1].matches("[-+*/^%]") ||
+                elementsExpr[2].matches("[-+*/^%]"))) {
+            throw new InvalidMathematicalSignException("Знак не поддерживается для выражений вида " +
+                    elementsExpr[0] + " " + elementsExpr[1] + elementsExpr[2] + " " + elementsExpr[3]);
+        }
+        if (elementsExpr.length != QUANTITY_ARGUMENTS) {
+            throw new InputMismatchException("Введите корректно выражение, например:  2 ^ 10");
         }
 
         if (elementsExpr[0].matches("-?\\d+")) {
             firstNumber = Integer.parseInt(elementsExpr[0]);
         } else {
-            System.out.println("Ошибка!!! Введите корректно первый аргумент(только целое число)");
-            return Double.NaN;
+            throw new InputFirstNumberException("Ошибка!!! Введите корректно первый" +
+                    " аргумент(только целое число)");
         }
+
         if (elementsExpr[1].matches("[-+*/^%]")) {
             sign = elementsExpr[1].charAt(0);
         } else {
-            System.out.println("Ошибка!!! Введите корректный знак математической операции");
-            return Double.NaN;
+            throw new IncorrectMathematicalSignException("Ошибка!!! Введите корректный знак" +
+                    " математической операции");
         }
+
         if (elementsExpr[2].matches("-?\\d+")) {
             secondNumber = Integer.parseInt(elementsExpr[2]);
         } else {
-            System.out.println("Ошибка!!! Введите корректно  второй аргумент(только целое число)");
-            return Double.NaN;
+            throw new InputSecondNumberException("Ошибка!!! Введите корректно  второй" +
+                    " аргумент(только целое число)");
         }
 
-        double result = 0;
-        switch (sign) {
-            case '+':
-                result = add(firstNumber, secondNumber);
-                break;
-            case '-':
-                result = subtract(firstNumber, secondNumber);
-                break;
-            case '*':
-                result = multiply(firstNumber, secondNumber);
-                break;
-            case '/':
-                result = div(firstNumber, secondNumber);
-                break;
-            case '^':
-                result = pow(firstNumber, secondNumber);
-                break;
-            case '%':
-                result = mod(firstNumber, secondNumber);
-                break;
-        }
-        return result;
+        return switch (sign) {
+            case '+' -> String.valueOf(add(firstNumber, secondNumber));
+            case '-' -> String.valueOf(subtract(firstNumber, secondNumber));
+            case '*' -> String.valueOf(multiply(firstNumber, secondNumber));
+            case '/' -> String.valueOf(div(firstNumber, secondNumber));
+            case '^' -> String.valueOf(pow(firstNumber, secondNumber));
+            case '%' -> String.valueOf(mod(firstNumber, secondNumber));
+            default -> throw new IncorrectMathematicalSignException("Ошибка!!!" +
+                    " Введите корректный знак математической операции");
+        };
     }
 
-    private double add(int firstNumber, int secondNumber) {
+    private static double add(int firstNumber, int secondNumber) {
         return firstNumber + secondNumber;
     }
 
-    private double subtract(int firstNumber, int secondNumber) {
+    private static double subtract(int firstNumber, int secondNumber) {
         return firstNumber - secondNumber;
     }
 
-    private double multiply(int firstNumber, int secondNumber) {
+    private static double multiply(int firstNumber, int secondNumber) {
         return firstNumber * secondNumber;
     }
 
-    private double div(int firstNumber, int secondNumber) {
+    private static double div(int firstNumber, int secondNumber) {
         if (secondNumber == 0) {
-            System.out.println("Ошибка. Делить на ноль нельзя!!!");
-            return Double.NaN;
+            throw new ArithmeticException("Ошибка. Делить на ноль нельзя!!!");
         }
         return (double) firstNumber / secondNumber;
     }
 
-    private double pow(int firstNumber, int secondNumber) {
+    private static double pow(int firstNumber, int secondNumber) {
         return Math.pow(firstNumber, secondNumber);
     }
 
-    private double mod(int firstNumber, int secondNumber) {
+    private static double mod(int firstNumber, int secondNumber) {
         if (secondNumber == 0) {
-            System.out.println("Ошибка. Делить на ноль нельзя!!!");
-            return Double.NaN;
+            throw new ArithmeticException("Ошибка. Делить на ноль нельзя!!!");
         }
         return Math.floorMod(firstNumber, secondNumber);
     }

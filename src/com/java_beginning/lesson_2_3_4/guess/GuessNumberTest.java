@@ -14,6 +14,7 @@ public class GuessNumberTest {
 
         GuessNumber game = new GuessNumber(player1, player2);
         String agreement = "yes";
+        
         do {
             if (agreement.equals("yes")) {
                 game.start();

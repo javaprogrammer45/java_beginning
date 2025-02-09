@@ -6,11 +6,19 @@ public class HangmanGameMain {
     public static void main(String[] args) {
         HangmanGame game = new HangmanGame();
         Scanner scanner = new Scanner(System.in);
-        String input;
+        String agreement = "yes";
         do {
-            game.start();
-            System.out.print("Вы хотите продолжить? yes/no: ");
-            input = scanner.nextLine().toLowerCase();
-        } while (input.equals("yes"));
+            if (agreement.equals("yes")) {
+                game.start();
+
+                System.out.print("Do you want to play again? [yes/no]: ");
+                agreement = scanner.nextLine().toLowerCase();
+            }
+
+            if (!agreement.equals("yes") && !agreement.equals("no")) {
+                System.out.print("Enter correct answer [yes / no]: ");
+                agreement = scanner.nextLine().toLowerCase();
+            }
+        } while (!agreement.equals("no"));
     }
 }

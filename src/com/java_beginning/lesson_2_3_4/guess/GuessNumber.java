@@ -1,12 +1,12 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GuessNumber {
     private Player player1;
     private Player player2;
-    int attemptsPlayer;
     private Scanner input = new Scanner(System.in);
 
     public GuessNumber(Player player1, Player player2) {
@@ -15,7 +15,7 @@ public class GuessNumber {
     }
 
     public void start() throws InputMismatchException {
-        System.out.println("Игра началась! У каждого игрока по 10 попыток...");
+        System.out.println("Игра началась! У каждого игрока по " + Player.getAttempts() + " попыток...");
         Player currPlayer;
         do {
             int targetNum = (int) (Math.random() * 100) + 1;
@@ -23,25 +23,29 @@ public class GuessNumber {
             boolean isEnd = false;
 
             do {
-                if (currPlayer.equals(player1)) {
-                    attemptsPlayer = player1.getCountAttempts() + 1;
-                } else {
-                    attemptsPlayer = player2.getCountAttempts() + 1;
+                if (currPlayer.equals(player2)) {
                     isEnd = true;
                 }
-                System.out.println("Попытка " + attemptsPlayer + "\nЧисло вводит " +
+                System.out.println("Попытка " + currPlayer.getAttemptsCount() + "\nЧисло вводит " +
                         currPlayer.getName() + ": ");
-                enterNumbers(currPlayer, input.nextInt());
+
+                if (!enterNumber(currPlayer, input.nextInt())) {
+                    continue;
+                }
 
                 if (isGuessed(currPlayer, targetNum)) {
                     System.out.println(currPlayer.getName() + " угадал число " + targetNum +
-                            " c " + attemptsPlayer + "-й попытки");
+                            " c " + currPlayer.getAttemptsCount() + "-й попытки");
                     printEnteredNumbers(player1);
                     printEnteredNumbers(player2);
+                    fillNumbers(player1);
+                    fillNumbers(player2);
+                    int newAttempts = 1;
+                    player1.setAttemptsCount(newAttempts);
+                    player2.setAttemptsCount(newAttempts);
                     return;
                 }
-
-                System.out.println("Не угадал, " + currPlayer.extractNumberArray(currPlayer.getNumbers()) +
+                System.out.println("Не угадал, " + currPlayer.getCurrNumber() +
                         " не равно " + targetNum +
                         ", переход хода к другому игроку...\n");
                 currPlayer = !isEnd ? player2 : player1;
@@ -49,37 +53,35 @@ public class GuessNumber {
         } while (true);
     }
 
-    private void enterNumbers(Player player, int number) {
-        do {
-            if (choiceNumber(player, number)) {
-                break;
-            }
-        } while (false);
-    }
-
-    private boolean choiceNumber(Player player, int number) {
+    private boolean enterNumber(Player currPlayer, int number) {
+        boolean isEnter = false;
         try {
-            player.addNumber(number);
-            return true;
+            currPlayer.addNumber(number);
+            isEnter = true;
         } catch (RuntimeException r) {
             System.out.println(r.getMessage());
-            return false;
         }
+        return isEnter;
     }
 
     private boolean isGuessed(Player currPlayer, int targetNum) {
-        if (currPlayer.extractNumberArray(currPlayer.getNumbers()) != targetNum) {
-            System.out.println((currPlayer.extractNumberArray(currPlayer.getNumbers()) > targetNum ?
-                    "Больше " : "Меньше ") + "загаданного!");
+        int currNumber = currPlayer.getCurrNumber();
+        if (currNumber != targetNum) {
+            System.out.println((currNumber > targetNum ?
+                    "больше " : "меньше ") + "загаданного!");
         }
-        return currPlayer.extractNumberArray(currPlayer.getNumbers()) == targetNum;
+        return currNumber == targetNum;
     }
 
     private void printEnteredNumbers(Player player) {
-        int[] numbersPlayer = player.getNumbers();
-        for (int j : numbersPlayer) {
-            System.out.print(j + " ");
+        int[] playerNumbers = player.getNumbers();
+        for (int number : playerNumbers) {
+            System.out.print(number + " ");
         }
         System.out.println();
+    }
+
+    private void fillNumbers(Player currPlayer) {
+        Arrays.fill(currPlayer.getNumbers(), 0, currPlayer.getAttemptsCount() - 1, 0);
     }
 }

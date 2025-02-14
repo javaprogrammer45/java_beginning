@@ -5,13 +5,15 @@ import java.util.*;
 public class Bookshelf {
     private int quantityBooks;
     private Book book;
-    private List<Book> books;
-private boolean isStarted = true;
+    private List<Book> books =new ArrayList<>();
+    private boolean isStarted = true;
+//    private int quantityElements;
+    private List<Integer> elements = new ArrayList<>();
 
     public Bookshelf() {
-   }
+    }
 
-    public Bookshelf(int quantityBooks, Book book,List<Book> books){
+    public Bookshelf(int quantityBooks, Book book, List<Book> books) {
         this.quantityBooks = quantityBooks;
         this.book = book;
         this.books = books;
@@ -19,20 +21,20 @@ private boolean isStarted = true;
 
     public String start() {
         String welcome = "";
-        if(isStarted){
-        try {
-            welcome = "Welcome to the Bookshelf !!!";
-            char[] letters = welcome.toCharArray();
-            for (char letter : letters) {
-                System.out.print(letter);
-                Thread.sleep(200);
+        if (isStarted) {
+            try {
+                welcome = "Welcome to the Bookshelf !!!";
+                char[] letters = welcome.toCharArray();
+                for (char letter : letters) {
+                    System.out.print(letter);
+                    Thread.sleep(200);
+                }
+                System.out.print("  ");
+            } catch (InterruptedException e) {
+                System.out.println("Welcome to the Bookshelf !!!");
             }
-            System.out.print("  ");
-        } catch (InterruptedException e) {
-            System.out.println("Welcome to the Bookshelf !!!");
-        }
-        System.out.println("\nШкаф пуст. Вы можете добавить в него первую книгу");
-        isStarted = false;
+            System.out.println("\nШкаф пуст. Вы можете добавить в него первую книгу");
+            isStarted = false;
         }
 
         printMenu();
@@ -43,11 +45,12 @@ private boolean isStarted = true;
             numberMenu = scanner.nextInt();
             isInt = true;
             if (numberMenu > 4 || numberMenu < 1) {
-                System.out.print("Ошибка!!! Такого пункта меню в списке нет.\n Введите номер нужной Вам операции, например: 1 и для продолжения работы нажмите клавишу <Enter>:");
+                System.out.print("Ошибка!!! Такого пункта меню в списке нет.\nВведите номер нужной Вам операции, например: 1. Для продолжения работы нажмите клавишу <Enter>: ");
                 isInt = false;
             }
         } while (!isInt);
-        choiceMenu(new ArrayList<>(), new Book(), numberMenu);
+        choiceMenu(books, new Book(), numberMenu);
+        printShelves(books);
         return welcome;
     }
 
@@ -55,18 +58,25 @@ private boolean isStarted = true;
         Scanner scanner = new Scanner(System.in);
         switch (numberMenu) {
             case 1:
-                System.out.println("Введите: автора книги, название книги, год публикации. Например:" +
-                        " Ирвинг Стоун-Жажда жизни-1973");
-                String[] stringsInput = scanner.nextLine().split("-");
-                book.setAuthor(stringsInput[0]);
-                book.setTitle(stringsInput[1]);
+                System.out.println("Введите(автор книги, название книги, год публикации). Например:" +
+                        " Ирвинг Стоун, Жажда жизни, 1973");
+                String nameBook = scanner.nextLine();
+//                char[] letters = nameBook.toCharArray();
+//                quantityElements = letters.length;
+                String[] stringsInput = nameBook.trim().split(",");
+                book.setAuthor(stringsInput[0].trim());
+                book.setTitle(stringsInput[1].trim());
                 try {
-                    int yearPublished = Integer.parseInt(stringsInput[2]);
+                    int yearPublished = Integer.parseInt(stringsInput[2].trim());
                     book.setYearPublication(yearPublished);
                 } catch (NumberFormatException e) {
                     System.out.println("Неправильный формат строки!!!");
                 }
                 addBook(books, book);
+            case 2:
+            case 3:
+                case 4:
+
 
         }
 
@@ -76,11 +86,11 @@ private boolean isStarted = true;
         return quantityBooks;
     }
 
-    public int getFreeShelves(List<Book>books) {
-        return 10 -  books.size();
+    public int getFreeShelves(List<Book> books) {
+        return 10 - books.size();
     }
 
-    public void addBook(List<Book> books,Book book) {
+    public void addBook(List<Book> books, Book book) {
         books.add(book);
         quantityBooks++;
     }
@@ -109,9 +119,9 @@ private boolean isStarted = true;
         quantityBooks--;
     }
 
-    public void clearBookShelf(List<Book> books){
+    public void clearBookShelf(List<Book> books) {
         books.clear();
-        quantityBooks=0;
+        quantityBooks = 0;
     }
 
     public void printMenu() {
@@ -121,15 +131,35 @@ private boolean isStarted = true;
             System.out.print(menu);
         }
         System.out.print("Выберите из списка меню. Введите номер нужной Вам операции, например:" +
-                " 1 и для продолжения работы нажмите клавишу <Enter>:");
+                " 1. Для продолжения работы нажмите клавишу <Enter>: ");
     }
 
     private void printShelves(List<Book> books) {
+
+
+//        elements.add(letters.length);
+//        int max = 0;
+//        int min = elements.get(0);
+//        for (Integer integer : elements) {
+//            if (integer.intValue() > max) {
+//                max = integer.intValue();
+//            }
+//            if (integer.intValue() < min) {
+//                min = integer.intValue();
+//            }
+//        }
+
+        String dash = "-";
+//        int sizeBOO
         for (Book book : books) {
-            System.out.print(book);
+//            if (book.toString().toCharArray().length ==max) {
+//                System.out.print("|" + book + "|\n" + "|" + dash.repeat(max) + "|\n");
+//            } else {
+//                System.out.print("|" + book + " ".repeat(max - min) + "|\n" + "|" + dash.repeat(max) + "|\n");
+//            }
+//            book.toString().toCharArray().length
         }
     }
-
 }
 
 

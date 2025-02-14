@@ -15,11 +15,14 @@ public class CalculatorTest {
                 System.out.println("Введите выражение из  аргументов, например:  2 ^ 10");
                 String mathExpr = sc.nextLine();
 
-                String result = "";
+                double result;
                 try {
                     result = Calculator.calculate(mathExpr);
-                } catch (InvalidMathematicalSignException e) {
-                    System.out.println(e.getMessage());
+                } catch (InputSignNotSupported f) {
+                    System.out.println(f.getMessage());
+                    continue;
+                } catch (IncorrectInputExpression i) {
+                    System.out.println(i.getMessage());
                     continue;
                 } catch (InputFirstNumberException r) {
                     System.out.println(r.getMessage());
@@ -41,7 +44,7 @@ public class CalculatorTest {
                     continue;
                 }
 
-                calcTest.printCalcResult(Calculator.getFirstNumber(), Calculator.getSecondNumber(), Calculator.getSign(), result);
+                calcTest.printCalcResult(Calculator.checkFirstNumber(mathExpr), Calculator.checkSecondNumber(mathExpr), Calculator.checkSign(mathExpr), result);
                 System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
@@ -52,9 +55,9 @@ public class CalculatorTest {
         } while (!answer.equals("no"));
     }
 
-    public void printCalcResult(int firstNumber, int secondNumber, char sign, String result) {
+    public void printCalcResult(int firstNumber, int secondNumber, char sign, double result) {
         DecimalFormat df = new DecimalFormat("#.###");
-        System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(Double.parseDouble(result)));
+        System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));
     }
 }
 

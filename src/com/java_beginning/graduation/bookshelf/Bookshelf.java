@@ -150,16 +150,28 @@ public class Bookshelf {
 //        }
 
         String dash = "-";
+        String space = " ";
 //        int sizeBOO
+        int maxLength = 0;
         for (Book book : books) {
-//            if (book.toString().toCharArray().length ==max) {
-//                System.out.print("|" + book + "|\n" + "|" + dash.repeat(max) + "|\n");
-//            } else {
-//                System.out.print("|" + book + " ".repeat(max - min) + "|\n" + "|" + dash.repeat(max) + "|\n");
-//            }
-//            book.toString().toCharArray().length
+            if (maxLength < book.toString().toCharArray().length) {
+                maxLength = book.toString().toCharArray().length;
+            }
+
+        }
+
+
+        for (Book book : books) {
+            if (maxLength > book.toString().toCharArray().length) {
+                System.out.println("|" + book + space.repeat(maxLength-book.toString().toCharArray().length) + "|");
+                System.out.println("|" + dash.repeat(maxLength) + "|");
+            } else {
+                System.out.println("|" + book + "|");
+                System.out.println("|" + dash.repeat(book.toString().toCharArray().length) + "|");
+            }
         }
     }
+
 }
 
 

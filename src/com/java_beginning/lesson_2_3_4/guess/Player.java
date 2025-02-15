@@ -1,11 +1,12 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class Player {
-    private final static int ATTEMPTS = 10;
-    private final static int START = 1;
-    private final static int END = 100;
+    public final static int ATTEMPTS = 10;
+    public final static int START = 1;
+    public final static int END = 100;
     private String name;
     private int[] numbers = new int[ATTEMPTS];
     private int attemptsCount;
@@ -23,11 +24,7 @@ public class Player {
     }
 
     public int getCurrNumber() {
-        return numbers[attemptsCount - 1];
-    }
-
-    public static int getAttempts() {
-        return ATTEMPTS;
+        return numbers[attemptsCount-1];
     }
 
     public int[] getNumbers() {

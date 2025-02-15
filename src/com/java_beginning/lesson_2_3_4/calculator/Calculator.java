@@ -2,68 +2,65 @@ package com.java_beginning.lesson_2_3_4.calculator;
 
 public class Calculator {
 
-    private static final int QUANTITY_ARGUMENTS = 3;
-    private static final int QUANTITY_ELEMENTS = 4;
+    private static final int QUANTITY_ARGS = 3;
 
     public static double calculate(String mathExpr) {
-        String[] elementsExpr = divideString(mathExpr);
+        String[] elementsExpr = extractElementsExpr(mathExpr);
+        String firstElement = elementsExpr[0];
+        String secondElement = elementsExpr[1];
+        String thirdElement = elementsExpr[2];
 
-        if ((elementsExpr.length == QUANTITY_ELEMENTS) && (elementsExpr[1].matches("[-+*/^%]") ||
-                elementsExpr[2].matches("[-+*/^%]"))) {
-            throw new InputSignNotSupported("Знак не поддерживается для выражений вида " +
-                    elementsExpr[0] + " " + elementsExpr[1] + elementsExpr[2] + " " + elementsExpr[3]);
+        if (elementsExpr.length != QUANTITY_ARGS) {
+            throw new IncorrectLengthExpressionException("Введите корректно выражение, например:  2 ^ 10");
         }
-
-        if (elementsExpr.length != QUANTITY_ARGUMENTS) {
-            throw new IncorrectInputExpression("Введите корректно выражение, например:  2 ^ 10");
-        }
-        return switch (checkSign(mathExpr)) {
-            case '+' -> add(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            case '-' -> subtract(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            case '*' -> multiply(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            case '/' -> div(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            case '^' -> pow(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            case '%' -> mod(checkFirstNumber(mathExpr), checkSecondNumber(mathExpr));
-            default -> throw new IncorrectMathematicalSignException("Ошибка!!!" +
+        int firstNumber = checkFirstNumber(firstElement);
+        char mathSign = checkSign(secondElement);
+        int secondNumber = checkSecondNumber(thirdElement);
+        printMathExpr(firstNumber, mathSign, secondNumber);
+        return switch (mathSign) {
+            case '+' -> add(firstNumber, secondNumber);
+            case '-' -> subtract(firstNumber, secondNumber);
+            case '*' -> multiply(firstNumber, secondNumber);
+            case '/' -> div(firstNumber, secondNumber);
+            case '^' -> pow(firstNumber, secondNumber);
+            case '%' -> mod(firstNumber, secondNumber);
+            default -> throw new IncorrectMathSignException("Ошибка!!!" +
                     " Введите корректный знак математической операции");
         };
     }
 
-    public static String[] divideString(String mathExpr) {
+    private static String[] extractElementsExpr(String mathExpr) {
         return mathExpr.trim().replace(" ", "").split("");
     }
 
-    public static int checkFirstNumber(String mathExpr) {
-        String[] elementsExpr = divideString(mathExpr);
+    private static int checkFirstNumber(String firstElement) {
         int firstNumber;
-        if (elementsExpr[0].matches("-?\\d+")) {
-            firstNumber = Integer.parseInt(elementsExpr[0]);
+        if (firstElement.matches("-?\\d+")) {
+            firstNumber = Integer.parseInt(firstElement);
         } else {
-            throw new InputFirstNumberException("Ошибка!!! Введите корректно первый" +
+            throw new InputNumberException("Ошибка!!! Введите корректно" +
                     " аргумент(только целое число)");
         }
         return firstNumber;
     }
 
-    public static char checkSign(String mathExpr) {
-        String[] elementsExpr = divideString(mathExpr);
-        char sign;
-        if (elementsExpr[1].matches("[-+*/^%]")) {
-            sign = elementsExpr[1].charAt(0);
+    private static char checkSign(String secondElement) {
+        char mathSign;
+        if (secondElement.matches("[-+*/^%]")) {
+            mathSign = secondElement.charAt(0);
         } else {
-            throw new IncorrectMathematicalSignException("Ошибка!!! Введите корректный знак" +
+            throw new IncorrectMathSignException("Ошибка!!! Введите корректный знак" +
                     " математической операции");
         }
-        return sign;
+        return mathSign;
     }
 
-    public static int checkSecondNumber(String mathExpr) {
-        String[] elementsExpr = divideString(mathExpr);
+    private static int checkSecondNumber(String thirdElement) {
         int secondNumber;
-        if (elementsExpr[2].matches("-?\\d+")) {
-            secondNumber = Integer.parseInt(elementsExpr[2]);
+        if (thirdElement.matches("-?\\d+")) {
+            secondNumber = Integer.parseInt(thirdElement);
         } else {
-            throw new InputFirstNumberException("Ошибка!!! Введите корректно второй" +
+            throw new InputNumberException("Ошибка!!! Введите корректно" +
                     " аргумент(только целое число)");
         }
         return secondNumber;
@@ -97,5 +94,9 @@ public class Calculator {
             throw new ArithmeticException("Ошибка. Делить на ноль нельзя!!!");
         }
         return Math.floorMod(firstNumber, secondNumber);
+    }
+
+    private static void printMathExpr(int firstNumber, char mathSign, int secondNumber) {
+        System.out.print(firstNumber + " " + mathSign + " " + secondNumber);
     }
 }

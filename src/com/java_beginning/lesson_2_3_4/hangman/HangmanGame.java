@@ -5,21 +5,20 @@ import java.util.Scanner;
 
 public class HangmanGame {
     private String[] guessableWord = {"Яблоко", "Хлеб", "Сало", "Сыр", "Сок"};
-    private String[] gallows = {" ",
-            "{\"________\",",
+    private String[] gallows = {
+            "\"________\",",
             "\"|     |\",",
             "\"|     @\",",
             "\"|    /|\\\",",
             "\"|    / \\\",",
-            "\"| GAME OVER!\"",
-            "};"};
+            "\"| GAME OVER!\""};
     private boolean isInput = true;
 
     public void start() {
         SecureRandom random = new SecureRandom();
         String randomWord = guessableWord[random.nextInt(guessableWord.length)];
         System.out.println(randomWord);
-        int attempts = gallows.length - 1;
+        int attempts = gallows.length;
         int counter = 1;
         StringBuilder mask = new StringBuilder();
         mask.repeat('*', randomWord.length());

@@ -18,33 +18,15 @@ public class CalculatorTest {
                 double result;
                 try {
                     result = Calculator.calculate(mathExpr);
-                } catch (InputSignNotSupported f) {
+                } catch (InputSignNotSupportedException | IncorrectLengthExpressionException |
+                         InputNumberException |
+                         IncorrectMathSignException | IllegalStateException | ArithmeticException |
+                         InputMismatchException f) {
                     System.out.println(f.getMessage());
-                    continue;
-                } catch (IncorrectInputExpression i) {
-                    System.out.println(i.getMessage());
-                    continue;
-                } catch (InputFirstNumberException r) {
-                    System.out.println(r.getMessage());
-                    continue;
-                } catch (InputSecondNumberException v) {
-                    System.out.println(v.getMessage());
-                    continue;
-                } catch (IncorrectMathematicalSignException m) {
-                    System.out.println(m.getMessage());
-                    continue;
-                } catch (IllegalStateException c) {
-                    System.out.println(c.getMessage());
-                    continue;
-                } catch (ArithmeticException ae) {
-                    System.out.println(ae.getMessage());
-                    continue;
-                } catch (InputMismatchException i) {
-                    System.out.println(i.getMessage());
                     continue;
                 }
 
-                calcTest.printCalcResult(Calculator.checkFirstNumber(mathExpr), Calculator.checkSecondNumber(mathExpr), Calculator.checkSign(mathExpr), result);
+                calcTest.printCalcResult(result);
                 System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
@@ -55,9 +37,9 @@ public class CalculatorTest {
         } while (!answer.equals("no"));
     }
 
-    public void printCalcResult(int firstNumber, int secondNumber, char sign, double result) {
+    public void printCalcResult(double result) {
         DecimalFormat df = new DecimalFormat("#.###");
-        System.out.println(firstNumber + " " + sign + " " + secondNumber + " = " + df.format(result));
+        System.out.println(" = " + df.format(result));
     }
 }
 

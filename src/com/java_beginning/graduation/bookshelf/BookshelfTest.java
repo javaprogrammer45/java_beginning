@@ -9,7 +9,7 @@ public class BookshelfTest {
 
         do {
             bookshelf.start();
-            System.out.print("Для продолжения работы нажмите клавишу <Enter>");
+            System.out.print("Для продолжения работы нажмите клавишу <Enter>: ");
             String answer = input.nextLine().toLowerCase();
         } while (true);
     }

@@ -1,7 +1,6 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public class Player {
     public final static int ATTEMPTS = 10;
@@ -24,7 +23,7 @@ public class Player {
     }
 
     public int getCurrNumber() {
-        return numbers[attemptsCount-1];
+        return numbers[attemptsCount - 1];
     }
 
     public int[] getNumbers() {
@@ -41,6 +40,11 @@ public class Player {
                     "в отрезок [" + START + "," + END + "]");
         }
         numbers[attemptsCount++] = number;
+    }
+
+    public int[] fillNumbers() {
+        Arrays.fill(numbers, 0);
+        return numbers;
     }
 }
 

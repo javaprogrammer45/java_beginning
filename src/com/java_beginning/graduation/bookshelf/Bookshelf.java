@@ -62,7 +62,7 @@ public class Bookshelf {
 
     public void choiceMenu(List<Book> books, Book book, int numberMenu) {
         Scanner scanner = new Scanner(System.in);
-
+        String titleBook="";
         switch (numberMenu) {
             case 1:
                 System.out.println("Введите: автор книги, название книги, год публикации. Например:" +
@@ -78,13 +78,15 @@ public class Bookshelf {
                 }
                 addBook(books, book);
                 break;
-            case 2:
+            case 2:   System.out.println("Введите: название книги. Например:" +
+                    " Жажда жизни");
+                titleBook = scanner.nextLine().trim();
 
                 break;
             case 3:
                 System.out.println("Введите: название книги. Например:" +
                         " Жажда жизни");
-                String titleBook = scanner.nextLine().trim();
+                titleBook = scanner.nextLine().trim();
                 try {
                     Book searchedBook = searchGetBook(books, titleBook);
                     System.out.println(searchedBook.toString());
@@ -126,12 +128,12 @@ public class Bookshelf {
         return book;
     }
 
-    public void deleteBook(List<Book> books, String title) {
+    public void deleteBook(List<Book> books, String title) throws NotFoundBookException {
         if (!books.isEmpty()) {
             for (Book book : books) {
                 if (book.getTitle().equals(title)) {
                     books.remove(book);
-                }
+                }else{throw new NotFoundBookException("Книга не найдена."); }
             }
         }
         quantityBooks--;

@@ -1,6 +1,5 @@
 package com.java_beginning.lesson_2_3_4.guess;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -35,17 +34,16 @@ public class GuessNumber {
                 }
                 if (isGuessed(currPlayer, targetNumber)) {
                     System.out.println(currPlayer.getName() + " угадал число " + targetNumber +
-                            " c " + currPlayer.getAttemptsCount() + "-й попытки");
-                    printEnteredNumbers(player1);
-                    printEnteredNumbers(player2);
-                    fillNumbers(player1);
-                    fillNumbers(player2);
+                            " c " + (currPlayer.getAttemptsCount() - 1) + "-й попытки");
+                    printEnteredNumbers(currPlayer);
+                    player1.fillNumbers();
+                    player2.fillNumbers();
                     int newAttempts = 1;
                     player1.setAttemptsCount(newAttempts);
                     player2.setAttemptsCount(newAttempts);
                     return;
                 }
-                System.out.print("Не угадал, " + (currPlayer.getCurrNumber() - 1) +
+                System.out.print("Не угадал, " + currPlayer.getCurrNumber() +
                         " не равно " + targetNumber +
                         ", переход хода к другому игроку");
                 printEnteredNumbers(currPlayer);
@@ -73,15 +71,11 @@ public class GuessNumber {
     }
 
     private void printEnteredNumbers(Player player) {
-        int[] playerNumbers = player.getNumbers();
+        int[] numbersPlayer = player.getNumbers();
         System.out.print("\nЧисла игрока " + player.getName() + ": ");
-        for (int number : playerNumbers) {
+        for (int number : numbersPlayer) {
             System.out.print(number + " ");
         }
         System.out.println();
-    }
-
-    private void fillNumbers(Player currPlayer) {
-        Arrays.fill(currPlayer.getNumbers(), 0, currPlayer.getAttemptsCount() - 1, 0);
     }
 }

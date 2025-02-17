@@ -19,13 +19,12 @@ public class CalculatorTest {
                 try {
                     result = Calculator.calculate(mathExpr);
                 } catch (InputSignNotSupportedException | IncorrectLengthExpressionException |
-                         InputNumberException |
-                         IncorrectMathSignException | IllegalStateException | ArithmeticException |
-                         InputMismatchException f) {
-                    System.out.println(f.getMessage());
+                         NumberFormatException |
+                         UnsupportedOperationException | IllegalStateException | ArithmeticException |
+                         InputMismatchException ex) {
+                    System.out.println(ex.getMessage());
                     continue;
                 }
-
                 calcTest.printCalcResult(result);
                 System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();

@@ -2,20 +2,19 @@ package com.java_beginning.lesson_2_3_4.calculator;
 
 public class Calculator {
 
-    private static final int QUANTITY_ARGS = 3;
+    private static final int ARGS_QUANTITY = 3;
 
     public static double calculate(String mathExpr) {
-        String[] elementsExpr = extractElementsExpr(mathExpr);
-        String firstElement = elementsExpr[0];
-        String secondElement = elementsExpr[1];
-        String thirdElement = elementsExpr[2];
+        String[] args = extractElementsExpr(mathExpr);
+        String firstElement = args[0];
+        String secondElement = args[1];
+        String thirdElement = args[2];
 
-        if (elementsExpr.length != QUANTITY_ARGS) {
-            throw new IncorrectLengthExpressionException("Введите корректно выражение, например:  2 ^ 10");
-        }
-        int firstNumber = checkFirstNumber(firstElement);
+        checkLengthArray(args);
+
+        int firstNumber = checkNumber(firstElement);
         char mathSign = checkSign(secondElement);
-        int secondNumber = checkSecondNumber(thirdElement);
+        int secondNumber = checkNumber(thirdElement);
         printMathExpr(firstNumber, mathSign, secondNumber);
         return switch (mathSign) {
             case '+' -> add(firstNumber, secondNumber);
@@ -24,7 +23,7 @@ public class Calculator {
             case '/' -> div(firstNumber, secondNumber);
             case '^' -> pow(firstNumber, secondNumber);
             case '%' -> mod(firstNumber, secondNumber);
-            default -> throw new IncorrectMathSignException("Ошибка!!!" +
+            default -> throw new UnsupportedOperationException("Ошибка!!!" +
                     " Введите корректный знак математической операции");
         };
     }
@@ -33,15 +32,21 @@ public class Calculator {
         return mathExpr.trim().replace(" ", "").split("");
     }
 
-    private static int checkFirstNumber(String firstElement) {
-        int firstNumber;
-        if (firstElement.matches("-?\\d+")) {
-            firstNumber = Integer.parseInt(firstElement);
+    private static void checkLengthArray(String[] args) {
+        if (args.length != ARGS_QUANTITY) {
+            throw new IncorrectLengthExpressionException("Введите корректно выражение, например:  2 ^ 10");
+        }
+    }
+
+    private static int checkNumber(String element) {
+        int number;
+        if (element.matches("-?\\d+")) {
+            number = Integer.parseInt(element);
         } else {
-            throw new InputNumberException("Ошибка!!! Введите корректно" +
+            throw new NumberFormatException("Ошибка!!! Введите корректно" +
                     " аргумент(только целое число)");
         }
-        return firstNumber;
+        return number;
     }
 
     private static char checkSign(String secondElement) {
@@ -49,21 +54,10 @@ public class Calculator {
         if (secondElement.matches("[-+*/^%]")) {
             mathSign = secondElement.charAt(0);
         } else {
-            throw new IncorrectMathSignException("Ошибка!!! Введите корректный знак" +
+            throw new UnsupportedOperationException("Ошибка!!! Введите корректный знак" +
                     " математической операции");
         }
         return mathSign;
-    }
-
-    private static int checkSecondNumber(String thirdElement) {
-        int secondNumber;
-        if (thirdElement.matches("-?\\d+")) {
-            secondNumber = Integer.parseInt(thirdElement);
-        } else {
-            throw new InputNumberException("Ошибка!!! Введите корректно" +
-                    " аргумент(только целое число)");
-        }
-        return secondNumber;
     }
 
     private static double add(int firstNumber, int secondNumber) {
@@ -96,7 +90,7 @@ public class Calculator {
         return Math.floorMod(firstNumber, secondNumber);
     }
 
-    private static void printMathExpr(int firstNumber, char mathSign, int secondNumber) {
+    public static void printMathExpr(int firstNumber, char mathSign, int secondNumber) {
         System.out.print(firstNumber + " " + mathSign + " " + secondNumber);
     }
 }

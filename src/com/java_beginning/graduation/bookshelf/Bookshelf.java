@@ -52,7 +52,7 @@ public class Bookshelf {
             }
         } while (!isInt);
         try {
-            choiceMenu(books, new Book(), numberMenu);
+           // choiceMenu(books, new Book(), numberMenu);
         } catch (InputMismatchException i) {
             System.out.println(i.getMessage());
         }
@@ -72,7 +72,7 @@ public class Bookshelf {
                 book.setTitle(stringsInput[1].trim());
                 try {
                     int yearPublished = Integer.parseInt(stringsInput[2].trim());
-                    book.setYearPublication(yearPublished);
+                    book.setYearPublished(yearPublished);
                 } catch (NumberFormatException e) {
                     System.out.println("Неправильный формат года издания книги!!!");
                 }

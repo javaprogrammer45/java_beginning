@@ -5,13 +5,10 @@ public class Book {
     private String title;
     private int yearPublished;
 
-    public Book() {
-    }
-
-    public Book(String author, String title, int yearPublication) {
+    public Book(String author, String title, int yearPublished) {
         this.author = author;
         this.title = title;
-        this.yearPublished = yearPublication;
+        this.yearPublished = yearPublished;
     }
 
     public String getAuthor() {
@@ -30,12 +27,12 @@ public class Book {
         this.title = title;
     }
 
-    public int getYearPublication() {
+    public int getYearPublished() {
         return yearPublished;
     }
 
-    public void setYearPublication(int yearPublication) {
-        this.yearPublished = yearPublication;
+    public void setYearPublished(int yearPublished) {
+        this.yearPublished = yearPublished;
     }
 
     @Override

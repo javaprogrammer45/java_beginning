@@ -30,21 +30,17 @@ public class Player {
         return Arrays.copyOf(numbers, attemptsCount);
     }
 
-    public void setAttemptsCount(int attemptsCount) {
-        this.attemptsCount = attemptsCount - 1;
-    }
-
     public void addNumber(int number) {
         if (number < START || number > END) {
             throw new RuntimeException("Введите корректные данные...Число должно входить" +
-                    "в отрезок [" + START + "," + END + "]");
+                    " в отрезок [" + START + "," + END + "]");
         }
         numbers[attemptsCount++] = number;
     }
 
-    public int[] fillNumbers() {
-        Arrays.fill(numbers, 0);
-        return numbers;
+    public void clear() {
+        Arrays.fill(numbers, 0, attemptsCount, 0);
+        attemptsCount = 0;
     }
 }
 

@@ -1,62 +1,52 @@
 package com.java_beginning.lesson_2_3_4.calculator;
 
 public class Calculator {
-
     private static final int ARGS_QUANTITY = 3;
 
     public static double calculate(String mathExpr) {
-        String[] args = extractElementsExpr(mathExpr);
-        String firstElement = args[0];
-        String secondElement = args[1];
-        String thirdElement = args[2];
+        String[] args = splitArgs(mathExpr);
 
-        checkLengthArray(args);
+        checkLengthMathExpr(args);
 
-        int firstNumber = checkNumber(firstElement);
-        char mathSign = checkSign(secondElement);
-        int secondNumber = checkNumber(thirdElement);
-        printMathExpr(firstNumber, mathSign, secondNumber);
-        return switch (mathSign) {
-            case '+' -> add(firstNumber, secondNumber);
-            case '-' -> subtract(firstNumber, secondNumber);
-            case '*' -> multiply(firstNumber, secondNumber);
-            case '/' -> div(firstNumber, secondNumber);
-            case '^' -> pow(firstNumber, secondNumber);
-            case '%' -> mod(firstNumber, secondNumber);
+        return switch (checkSign(args[1])) {
+            case '+' -> add(checkNumber(args[0]), checkNumber(args[2]));
+            case '-' -> subtract(checkNumber(args[0]), checkNumber(args[2]));
+            case '*' -> multiply(checkNumber(args[0]), checkNumber(args[2]));
+            case '/' -> div(checkNumber(args[0]), checkNumber(args[2]));
+            case '^' -> pow(checkNumber(args[0]), checkNumber(args[2]));
+            case '%' -> mod(checkNumber(args[0]), checkNumber(args[2]));
             default -> throw new UnsupportedOperationException("Ошибка!!!" +
                     " Введите корректный знак математической операции");
         };
     }
 
-    private static String[] extractElementsExpr(String mathExpr) {
-        return mathExpr.trim().replace(" ", "").split("");
+    private static String[] splitArgs(String mathExpr) {
+        return mathExpr.split("");
     }
 
-    private static void checkLengthArray(String[] args) {
+    private static void checkLengthMathExpr(String[] args) {
         if (args.length != ARGS_QUANTITY) {
-            throw new IncorrectLengthExpressionException("Введите корректно выражение, например:  2 ^ 10");
+            throw new ExprTooLongException("Введите корректно выражение, например:  2 ^ 10");
         }
     }
 
     private static int checkNumber(String element) {
         int number;
-        if (element.matches("-?\\d+")) {
-            number = Integer.parseInt(element);
-        } else {
+        if (!element.matches("-?\\d+")) {
             throw new NumberFormatException("Ошибка!!! Введите корректно" +
                     " аргумент(только целое число)");
         }
+        number = Integer.parseInt(element);
         return number;
     }
 
     private static char checkSign(String secondElement) {
         char mathSign;
-        if (secondElement.matches("[-+*/^%]")) {
-            mathSign = secondElement.charAt(0);
-        } else {
+        if (!secondElement.matches("[-+*/^%]")) {
             throw new UnsupportedOperationException("Ошибка!!! Введите корректный знак" +
                     " математической операции");
         }
+        mathSign = secondElement.charAt(0);
         return mathSign;
     }
 
@@ -88,9 +78,5 @@ public class Calculator {
             throw new ArithmeticException("Ошибка. Делить на ноль нельзя!!!");
         }
         return Math.floorMod(firstNumber, secondNumber);
-    }
-
-    public static void printMathExpr(int firstNumber, char mathSign, int secondNumber) {
-        System.out.print(firstNumber + " " + mathSign + " " + secondNumber);
     }
 }

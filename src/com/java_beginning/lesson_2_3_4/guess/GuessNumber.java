@@ -36,11 +36,8 @@ public class GuessNumber {
                     System.out.println(currPlayer.getName() + " угадал число " + targetNumber +
                             " c " + (currPlayer.getAttemptsCount() - 1) + "-й попытки");
                     printEnteredNumbers(currPlayer);
-                    player1.fillNumbers();
-                    player2.fillNumbers();
-                    int newAttempts = 1;
-                    player1.setAttemptsCount(newAttempts);
-                    player2.setAttemptsCount(newAttempts);
+                    player1.clear();
+                    player2.clear();
                     return;
                 }
                 System.out.print("Не угадал, " + currPlayer.getCurrNumber() +
@@ -54,10 +51,14 @@ public class GuessNumber {
 
     private void enterNumber(Player currPlayer) {
         Scanner input = new Scanner(System.in);
-        boolean isEntered;
+        boolean isEntered = false;
         do {
-            currPlayer.addNumber(input.nextInt());
-            isEntered = true;
+            try {
+                currPlayer.addNumber(input.nextInt());
+                isEntered = true;
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         } while (!isEntered);
     }
 

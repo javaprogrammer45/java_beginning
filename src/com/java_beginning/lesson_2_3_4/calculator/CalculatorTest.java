@@ -13,19 +13,19 @@ public class CalculatorTest {
         do {
             if (answer.equals("yes")) {
                 System.out.println("Введите выражение из  аргументов, например:  2 ^ 10");
-                String mathExpr = sc.nextLine();
-
+                String mathExpr = sc.nextLine().trim().replace(" ", "");
+                char[] elementsMathExpr = mathExpr.toCharArray();
                 double result;
                 try {
                     result = Calculator.calculate(mathExpr);
-                } catch (InputSignNotSupportedException | IncorrectLengthExpressionException |
+                } catch (ExprTooLongException |
                          NumberFormatException |
                          UnsupportedOperationException | IllegalStateException | ArithmeticException |
                          InputMismatchException ex) {
                     System.out.println(ex.getMessage());
                     continue;
                 }
-                calcTest.printCalcResult(result);
+                calcTest.printCalcResult(elementsMathExpr, result);
                 System.out.print("Хотите продолжить вычисления? [yes / no]:");
                 answer = sc.nextLine().toLowerCase();
             }
@@ -36,9 +36,10 @@ public class CalculatorTest {
         } while (!answer.equals("no"));
     }
 
-    public void printCalcResult(double result) {
+    public void printCalcResult(char[] elementsMathExpr, double result) {
         DecimalFormat df = new DecimalFormat("#.###");
-        System.out.println(" = " + df.format(result));
+        System.out.println(elementsMathExpr[0] + " " + elementsMathExpr[1] + " " +
+                elementsMathExpr[2] + " = " + df.format(result));
     }
 }
 

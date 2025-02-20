@@ -5,23 +5,37 @@ public class Calculator {
 
     public static double calculate(String mathExpr) {
         String[] args = splitArgs(mathExpr);
-
         checkLengthMathExpr(args);
 
-        return switch (checkSign(args[1])) {
-            case '+' -> add(checkNumber(args[0]), checkNumber(args[2]));
-            case '-' -> subtract(checkNumber(args[0]), checkNumber(args[2]));
-            case '*' -> multiply(checkNumber(args[0]), checkNumber(args[2]));
-            case '/' -> div(checkNumber(args[0]), checkNumber(args[2]));
-            case '^' -> pow(checkNumber(args[0]), checkNumber(args[2]));
-            case '%' -> mod(checkNumber(args[0]), checkNumber(args[2]));
+        int firstNumber = checkNumber(args[0]);
+        char mathSign = args[1].charAt(0);
+        int secondNumber = checkNumber(args[2]);
+        return switch (mathSign) {
+            case '+' -> add(firstNumber, secondNumber);
+            case '-' -> subtract(firstNumber, secondNumber);
+            case '*' -> multiply(firstNumber, secondNumber);
+            case '/' -> div(firstNumber, secondNumber);
+            case '^' -> pow(firstNumber, secondNumber);
+            case '%' -> mod(firstNumber, secondNumber);
             default -> throw new UnsupportedOperationException("Ошибка!!!" +
                     " Введите корректный знак математической операции");
         };
     }
 
     private static String[] splitArgs(String mathExpr) {
-        return mathExpr.split("");
+        String[] elementsMathExpr = mathExpr.trim().split(" ");
+        String[] arrayMathExpr = new String[ARGS_QUANTITY];
+        int index = 0;
+        for (int i = 0; i < elementsMathExpr.length; i++) {
+            for (int j = 0; j < arrayMathExpr.length; j++) {
+                if (!elementsMathExpr[i].equals("")) {
+                    arrayMathExpr[index] = elementsMathExpr[i];
+                    index++;
+                    break;
+                }
+            }
+        }
+        return arrayMathExpr;
     }
 
     private static void checkLengthMathExpr(String[] args) {
@@ -38,16 +52,6 @@ public class Calculator {
         }
         number = Integer.parseInt(element);
         return number;
-    }
-
-    private static char checkSign(String secondElement) {
-        char mathSign;
-        if (!secondElement.matches("[-+*/^%]")) {
-            throw new UnsupportedOperationException("Ошибка!!! Введите корректный знак" +
-                    " математической операции");
-        }
-        mathSign = secondElement.charAt(0);
-        return mathSign;
     }
 
     private static double add(int firstNumber, int secondNumber) {

@@ -8,7 +8,7 @@ public class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
 
         do {
-            bookshelf.start();
+//            bookshelf.start();
             System.out.print("Для продолжения работы нажмите клавишу <Enter>: ");
             String answer = input.nextLine().toLowerCase();
         } while (true);

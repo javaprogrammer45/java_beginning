@@ -11,30 +11,6 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getYearPublished() {
-        return yearPublished;
-    }
-
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
     @Override
     public String toString() {
         return author + ", " + title + ", " + yearPublished;

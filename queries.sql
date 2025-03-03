@@ -1,17 +1,17 @@
 -- Таблица отсортированная по именам роботов в алфавитном порядке
 SELECT * 
- FROM schema.jaegers
-ORDER BY model_name;
+  FROM schema.jaegers
+ ORDER BY model_name;
 
 -- Таблица не уничтоженных роботов
 SELECT * 
- FROM schema.jaegers
-WHERE status != 'Destroyed';
+  FROM schema.jaegers
+ WHERE status != 'Destroyed';
 
 -- Таблица роботов серии Mark-1 и Mark-4
 SELECT * 
- FROM schema.jaegers
-WHERE mark IN ('Mark-1', 'Mark-4');
+  FROM schema.jaegers
+ WHERE mark IN ('Mark-1', 'Mark-4');
 
 -- Таблица отсортированная по убыванию по столбцу mark, кроме Mark-1 и Mark-4
 SELECT * 

@@ -1,22 +1,27 @@
 -- Таблица отсортированная по именам роботов в алфавитном порядке
-SELECT * FROM schema.jaegers
+SELECT * 
+ FROM schema.jaegers
 ORDER BY model_name;
 
 -- Таблица не уничтоженных роботов
-SELECT * FROM schema.jaegers
+SELECT * 
+ FROM schema.jaegers
 WHERE status != 'Destroyed';
 
 -- Таблица роботов серии Mark-1 и Mark-4
-SELECT * FROM schema.jaegers
+SELECT * 
+ FROM schema.jaegers
 WHERE mark IN ('Mark-1', 'Mark-4');
 
 -- Таблица отсортированная по убыванию по столбцу mark, кроме Mark-1 и Mark-4
-SELECT * FROM schema.jaegers
-   WHERE mark NOT IN('Mark-1', 'Mark-4')
-ORDER BY mark DESC;
+SELECT * 
+  FROM schema.jaegers
+ WHERE mark NOT IN('Mark-1', 'Mark-4')
+ ORDER BY mark DESC;
 
 -- Таблица самых старых роботов
-SELECT * FROM schema.jaegers
+SELECT * 
+  FROM schema.jaegers
  WHERE launch = (
 SELECT MAX(launch) FROM schema.jaegers
 );
@@ -36,13 +41,16 @@ UPDATE schema.jaegers
  WHERE status NOT IN ('Destroyed');
 
 -- Таблица с увеличенным  на единицу количеством уничтоженных kaiju у неразрушенных роботов
-SELECT * FROM schema.jaegers;
+SELECT * 
+  FROM schema.jaegers;
 
 -- Удаление уничтоженных роботов
-DELETE FROM schema.jaegers
-      WHERE status = 'Destroyed';
+DELETE 
+  FROM schema.jaegers
+ WHERE status = 'Destroyed';
 
 -- Таблица без уничтоженных роботов
-SELECT * FROM schema.jaegers;
+SELECT * 
+  FROM schema.jaegers;
 
 

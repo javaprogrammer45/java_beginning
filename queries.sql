@@ -1,56 +1,56 @@
--- Таблица отсортированная по именам роботов в алфавитном порядке
+\echo Таблица отсортированная по именам роботов в алфавитном порядке
 SELECT * 
-  FROM schema.jaegers
+  FROM jaegers
  ORDER BY model_name;
 
--- Таблица не уничтоженных роботов
+\echo Таблица не уничтоженных роботов
 SELECT * 
-  FROM schema.jaegers
+  FROM jaegers
  WHERE status != 'Destroyed';
 
--- Таблица роботов серии Mark-1 и Mark-4
+\echo Таблица роботов серии Mark-1 и Mark-4
 SELECT * 
-  FROM schema.jaegers
+  FROM jaegers
  WHERE mark IN ('Mark-1', 'Mark-4');
 
--- Таблица отсортированная по убыванию по столбцу mark, кроме Mark-1 и Mark-4
+\echo Таблица отсортированная по убыванию по столбцу mark, кроме Mark-1 и Mark-4
 SELECT * 
-  FROM schema.jaegers
+  FROM jaegers
  WHERE mark NOT IN('Mark-1', 'Mark-4')
  ORDER BY mark DESC;
 
--- Таблица самых старых роботов
+\echo Таблица самых старых роботов
 SELECT * 
-  FROM schema.jaegers
+  FROM jaegers
  WHERE launch = (
-SELECT MAX(launch) FROM schema.jaegers
+SELECT MAX(launch) FROM jaegers
 );
 
--- Информация из столбцов model_name, mark, launch, kaiju_kill тех роботов, которые уничтожили больше всех kaiju
-SELECT model_name, mark, launch, kaiju_kill FROM schema.jaegers
+\echo Информация из столбцов model_name, mark, launch, kaiju_kill тех роботов, которые уничтожили больше всех kaiju
+SELECT model_name, mark, launch, kaiju_kill FROM jaegers
  WHERE kaiju_kill = (
-SELECT MAX(kaiju_kill) FROM schema.jaegers
+SELECT MAX(kaiju_kill) FROM jaegers
 );
  
--- Средний вес роботов
-SELECT AVG (round(weight::numeric, 3)) AS avg_weight FROM schema.jaegers;
+\echo Средний вес роботов
+SELECT AVG (round(weight, 3)) AS avg_weight FROM jaegers;  
 
--- Инкремент количества уничтоженных kaiju у неразрушенных роботов
-UPDATE schema.jaegers 
+\echo Инкремент количества уничтоженных kaiju у неразрушенных роботов
+UPDATE jaegers 
    SET kaiju_kill = kaiju_kill + 1
  WHERE status NOT IN ('Destroyed');
 
--- Таблица с увеличенным  на единицу количеством уничтоженных kaiju у неразрушенных роботов
+\echo Таблица с увеличенным  на единицу количеством уничтоженных kaiju у неразрушенных роботов
 SELECT * 
-  FROM schema.jaegers;
+  FROM jaegers;
 
--- Удаление уничтоженных роботов
+\echo Удаление уничтоженных роботов
 DELETE 
-  FROM schema.jaegers
+  FROM jaegers
  WHERE status = 'Destroyed';
 
--- Таблица без уничтоженных роботов
+\echo Таблица без уничтоженных роботов
 SELECT * 
-  FROM schema.jaegers;
+  FROM jaegers;
 
 

@@ -23,13 +23,16 @@ SELECT *
 SELECT * 
   FROM jaegers
  WHERE launch = (
-SELECT MAX(launch) FROM jaegers
+SELECT MAX(launch) 
+  FROM jaegers
 );
 
 \echo Информация из столбцов model_name, mark, launch, kaiju_kill тех роботов, которые уничтожили больше всех kaiju
-SELECT model_name, mark, launch, kaiju_kill FROM jaegers
+SELECT model_name, mark, launch, kaiju_kill 
+  FROM jaegers
  WHERE kaiju_kill = (
-SELECT MAX(kaiju_kill) FROM jaegers
+SELECT MAX(kaiju_kill) 
+  FROM jaegers
 );
  
 \echo Средний вес роботов

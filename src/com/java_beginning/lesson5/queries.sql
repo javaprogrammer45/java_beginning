@@ -36,7 +36,8 @@ SELECT MAX(kaiju_kill)
 );
  
 \echo Средний вес роботов
-SELECT AVG (round(weight, 3)) AS avg_weight FROM jaegers;  
+SELECT AVG (round(weight, 3)) AS avg_weight 
+  FROM jaegers;  
 
 \echo Инкремент количества уничтоженных kaiju у неразрушенных роботов
 UPDATE jaegers 
